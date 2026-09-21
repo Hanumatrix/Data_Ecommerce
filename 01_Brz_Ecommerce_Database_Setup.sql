@@ -1,26 +1,26 @@
 /*======================================================
-Nombre del Script: Proyecto-Brz_Ecomerce.sql
-Fecha de inicio: 2024-06-10
-Gestión para: SQL Server
-Script para:
-    - Crear base de datos Brz_Ecomerce
-    - Tablas
-    - Vistas
-    - Procedimientos almacenados
-Objetivos:
-    - Crear KPI's
-    - Tablas con la información principal del ecommerce
-    - Dashboards
-Autor: Joseph Velasco
-Base de datos obtenida de: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+Script name: Brz Ecommerce project
+Start date: 2024-06-10
+Platform: SQL Server
+Script scope:
+    - Create the Brz_Ecomerce database
+    - Tables
+    - Views
+    - Stored procedures
+Objectives:
+    - Create KPIs
+    - Store the main ecommerce data
+    - Support dashboards
+Author: Tushar Rana
+Dataset source: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 ======================================================*/
 
 --======================================================
--- 1.1 Crear Base de Datos(SETUP)
+-- 1.1 Create Database (SETUP)
 --======================================================
 
 --======================================================
--- 1.1 Crear Base de Datos
+-- 1.1 Create Database
 --======================================================
 IF DB_ID('Brz_Ecomerce') IS NOT NULL
     DROP DATABASE Brz_Ecomerce;
@@ -30,19 +30,19 @@ CREATE DATABASE Brz_Ecomerce;
 USE Brz_Ecomerce;
 
 --======================================================
--- 1.2. Carga de Datos (usando el asistente de importación en SSMS)
+-- 1.2. Load Data (using the SSMS import wizard)
 --======================================================
 /*
-Los datos se cargan usando el asistente de importación en SSMS:
-- Clic derecho sobre la base de datos Brz_Ecomerce
-- Seleccionar Tareas -> Importar Datos
-- Seguir los pasos para importar los archivos CSV a las tablas
-Nota: intencionalmente los archivos CSV fueron cargados con errores en el tipo de dato
-para luego corregirlos en el script
+Data is loaded using the SSMS import wizard:
+- Right-click the Brz_Ecomerce database
+- Select Tasks -> Import Data
+- Follow the steps to import the CSV files into the tables
+Note: the CSV files intentionally contain data type errors
+that are corrected later in this script
 */
 
 --======================================================
--- 1.3. Llaves Primarias y Foráneas
+-- 1.3. Primary and Foreign Keys
 --======================================================
 
 -- Orders
@@ -57,7 +57,7 @@ ADD CONSTRAINT PK_customer_Customer_Id PRIMARY KEY (customer_id);
 ALTER TABLE orders
 ADD CONSTRAINT FK_orders_Customer_Id FOREIGN KEY (customer_id) REFERENCES customer(customer_id);
 
--- Corrección de incompatibilidad de tipo de dato en customer_id
+-- Correct customer_id data type incompatibility
 ALTER TABLE [dbo].[customer] DROP CONSTRAINT [PK_customer_Customer_Id] WITH (ONLINE = OFF);
 GO
 ALTER TABLE customer ALTER COLUMN customer_id NVARCHAR(100) NOT NULL;
@@ -89,7 +89,7 @@ ADD CONSTRAINT FK_order_item_Seller_Id FOREIGN KEY (seller_id) REFERENCES seller
 ALTER TABLE order_item
 ADD CONSTRAINT FK_Order_Item_Order_Id FOREIGN KEY (order_id) REFERENCES orders(order_id);
 
--- Corrección de incompatibilidad de tipo de dato en Order Reviews  y FK con Orders
+-- Correct Order Reviews data type incompatibility and add the Orders FK
 ALTER TABLE order_reviews
 ALTER COLUMN order_id NVARCHAR(100) NOT NULL;
 GO
@@ -104,7 +104,7 @@ ALTER TABLE products
 ADD CONSTRAINT FK_products_Product_Category_Name FOREIGN KEY (product_category_name) REFERENCES product_category_name_translation(product_category_name);
 
 --======================================================
--- 1.4. Normalización de Geolocalización
+-- 1.4. Geolocation Normalization
 --======================================================
 CREATE TABLE Geolocation_ZipCode(
     geolocation_zip_code_prefix NVARCHAR(100) PRIMARY KEY
@@ -127,7 +127,7 @@ ALTER TABLE geolocation
 ADD CONSTRAINT FK_Geolocation_Zipcode FOREIGN KEY (geolocation_zip_code_prefix) REFERENCES Geolocation_ZipCode(geolocation_zip_code_prefix);
 
 --======================================================
--- 1.5. Índices
+-- 1.5. Indexes
 --======================================================
 
 -- Customer
@@ -176,46 +176,46 @@ GO
 CREATE NONCLUSTERED INDEX IX_Sellers_Seller_City ON sellers(seller_city);
 GO
 
--- Índice compuesto en order_item para acelerar joins y conteos de ítems únicos
+-- Composite index on order_item to speed up joins and unique item counts
 CREATE NONCLUSTERED INDEX IX_OrderItem_Product_OrderItem
 ON order_item(product_id, order_id, order_item_id);
 
--- Índice compuesto en customer para mejorar agrupaciones y rankings por ciudad/estado
+-- Composite index on customer to improve city/state grouping and rankings
 CREATE NONCLUSTERED INDEX IX_Customer_City_State
 ON customer(customer_city, customer_state);
 
--- Índice compuesto en sellers para análisis geográfico de vendedores
+-- Composite index on sellers for seller geography analysis
 CREATE NONCLUSTERED INDEX IX_Sellers_City_State
 ON sellers(seller_city, seller_state);
 
--- Índice compuesto en orders para acelerar joins y filtros por cliente y estado
+-- Composite index on orders to speed up customer and status joins and filters
 CREATE NONCLUSTERED INDEX IX_Orders_Customer_Status
 ON orders(customer_id, order_status);
 
--- Índice compuesto en order_payments para análisis por tipo y valor de pago
+-- Composite index on order_payments for payment type and value analysis
 CREATE NONCLUSTERED INDEX IX_OrderPayments_Type_Value
 ON order_payments(payment_type, payment_value);
 
--- Índice compuesto en order_reviews para relacionar score con orden
+-- Composite index on order_reviews to relate scores to orders
 CREATE NONCLUSTERED INDEX IX_OrderReviews_Order_Score
 ON order_reviews(order_id, review_score);
 
 --======================================================
--- 1.6. Consultas para Validacion
+-- 1.6. Validation Queries
 --=====================================================
 
---Debe dar el total de cantidad de ordenes
+-- Should return the total number of orders
 SELECT COUNT(*) FROM orders;
 
---Debe mostrar el top 10 de los compradores
+-- Should show the top 10 customers
 SELECT top 10 * FROM customer;
 
---Debe mostrar de manera unica los status de pedidos existentes
+-- Should show the unique order statuses
 SELECT DISTINCT order_status FROM Orders;
 
---Si funciona debria debolver 0 filas
+-- Should return zero rows when integrity is valid
 SELECT * FROM orders WHERE customer_id NOT IN(SELECT customer_id FROM customer);
 
 --======================================================
--- Fin del Script
+-- End of Script
 --======================================================

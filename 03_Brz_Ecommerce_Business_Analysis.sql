@@ -6,7 +6,7 @@
 -- 3.1 clientes y mercado
 --===================================
 
--- 3.1.1. ¿en qué estados o ciudades tenemos la mayor concentración de clientes?
+-- 3.1.1. Which states or cities have the highest customer concentration?
 USE [brz_ecomerce];
 
 select  top 10
@@ -16,7 +16,7 @@ from vw_info_zonas
 group by estado
 order by sum(cant_clientes) desc;
 
--- 3.1.2.¿cuál es el crecimiento de nuevos clientes a lo largo del tiempo?
+-- 3.1.2. How does new customer growth change over time?
 
 with primeras_compras as (
     select 
@@ -51,7 +51,7 @@ from clientes_lag
 order by anio_compra, mes_compra;
 go
 
--- 3.1.3. ¿qué ciudades aportan el mayor volumen de órdenes?
+-- 3.1.3. Which cities contribute the highest order volume?
 
 select  top 10
         ciudad, 
@@ -61,12 +61,12 @@ group by ciudad
 order by sum(cant_clientes) desc;
 
 --===================================
--- 3.2. ventas y productos
+-- 3.2. Sales and Products
 --===================================
 
--- 3.2.1. ¿qué categorías de producto son las más vendidas y cuáles tienen menor rotación?
+-- 3.2.1. Which product categories sell the most and which have the lowest turnover?
 
--- categorias con items mas vendidos
+-- Categories with the most items sold
 select  top 10 
         categoria_producto,     
         sum(total_unidades_vendidas) cant_unidades_vendidas
@@ -74,7 +74,7 @@ from vw_info_producto
 group by categoria_producto
 order by cant_unidades_vendidas desc;
 
--- categorias con menos items vendidos
+-- Categories with the fewest items sold
 select  top 10 
         categoria_producto,     
         sum(total_unidades_vendidas) cant_unidades_vendidas
@@ -82,9 +82,9 @@ from vw_info_producto
 group by categoria_producto
 order by cant_unidades_vendidas asc;
 
--- 3.2.2. ¿cuál es el ticket promedio por cliente y por orden?
+-- 3.2.2. What is the average order value per customer and per order?
 
--- ticket promedio por cliente
+-- Average order value per customer
 select  customer_id,
         sum(total_compra_cliente)/nullif(sum(total_productos_comprados),0) as ticket_promedio_cliente
 from vw_info_clientes
@@ -92,7 +92,7 @@ group by customer_id
 ORDER BY ticket_promedio_cliente desc;
 
 
--- ticket promedio por orden
+-- Average order value per order
 
 select o.order_id,
        sum(op.payment_value)/nullif(count(oi.order_item_id),0) as ticket_promedio
@@ -102,7 +102,7 @@ inner join order_item as oi on oi.order_id = o.order_id
 group by o.order_id
 order by ticket_promedio desc;
 
--- 3.2.3 ¿qué productos concentran el mayor valor de ventas aproximado, descontando el costo de flete?
+-- 3.2.3. Which products have the highest estimated sales value after freight costs?
 
 select  top 10
         vp.product_id,
@@ -117,16 +117,16 @@ order by total_acumulado_menos_flete desc;
 /* 
 Nota:
 El campo total_acumulado_real representa el pago total realizado por el cliente a nivel de orden,
-obtenido a partir de la agregación de la información disponible en la tabla de pagos.
-Dado que el dataset no proporciona el valor pagado ni el costo asociado a cada ítem individual, 
-los análisis por producto se realizan como una aproximación, utilizando el total de pago de la orden y descontando 
-el costo de flete acumulado correspondiente a los productos incluidos.
+obtained by aggregating the information available in the payments table.
+Because the dataset does not provide the paid value or cost for each individual item,
+product-level analyses are estimates that use the order payment total and subtract
+the accumulated freight cost for the included products.
 
-Este enfoque permite identificar productos con mayor concentración de ingresos,
-manteniendo coherencia con las limitaciones del modelo de datos y evitando duplicaciones en los cálculos.
+This approach identifies products with the highest revenue concentration,
+while respecting the data model limitations and avoiding duplicate calculations.
 */
 
--- 3.2.4 ¿qué porcentaje de las ventas proviene del top 10 categorías?
+-- 3.2.4. What percentage of sales comes from the top 10 categories?
 
 -- hecho con with
 with rankedcategorias as (
@@ -157,10 +157,10 @@ from(
 ) as ranked;
 
 --===================================
--- 3.3. vendedores
+-- 3.3. Sellers
 --===================================
 
--- 3.3.1.¿qué vendedores concentran el mayor número de órdenes?
+-- 3.3.1. Which sellers handle the highest number of orders?
 
 select top 10
         seller_id,
@@ -191,7 +191,7 @@ group by seller_id;
 se observo que hay 833 ordenes las cuales no tienen seller_id
 */
 
--- 3.3.2. ¿cuál es el nivel de concentración del mercado y el % de ventas en manos del top 10 vendedores?
+-- 3.3.2. What is the market concentration and sales share of the top 10 sellers?
 
 with rango_vendedores as (
     select  seller_id,
@@ -208,7 +208,7 @@ select
         sum(case when rn > 10 then cant_ordenes else 0 end) as 'cant. ordenes de resto vendedores'
 from rango_vendedores
 go
--- 3.3.3.  ¿qué vendedores tienen mejor desempeño en tiempos de entrega?
+-- 3.3.3. Which sellers have the best delivery-time performance?
 
 --with con row_number:
 with vendedores as (
@@ -248,10 +248,10 @@ group by seller_id
 order by promedio_dias_entrega asc;
 
 --===================================
--- 3.4. logística y entregas
+-- 3.4. Logistics and Delivery
 --===================================
 
--- 3.4.1.¿cuál es el tiempo promedio de entrega por estado y por categoría de producto?
+-- 3.4.1. What is the average delivery time by state and product category?
 
 --tiempo promedio de entrega por estado
 select  estado,
@@ -276,7 +276,7 @@ select  estado_cliente,
 from vw_orders_detail
 group by estado_cliente,categoria_producto;
 
--- 3.4.2. ¿qué porcentaje de órdenes se entregan dentro del tiempo estimado?
+-- 3.4.2. What percentage of orders are delivered within the estimated time?
 
 with tiempo as (
     select 
@@ -296,9 +296,9 @@ select
     sum(case when tiempo_prom_entrega_dias > tiempo_prom_entrega_estimada_dias  then 1 else 0 end) * 100.0 / count(*) as porcentaje_fuera_tiempo
 from tiempo
 go
--- 3.4.3.¿Qué estados o ciudades tienen el porcentaje más alto de órdenes entregadas fuera del tiempo estimado?
+-- 3.4.3. Which states or cities have the highest percentage of late deliveries?
 
--- porcentaje de entrega fuera de tiempo más elevado agrupados por ciudades
+-- Highest late-delivery percentage grouped by city
 with orden_ciudad as (
     select  
         o.order_id,
@@ -322,7 +322,7 @@ from orden_ciudad
 group by ciudad
 order by porcentaje_fuera_tiempo desc;
 
--- porcentaje de entrega fuera de tiempo más elevado agrupados por estados
+-- Highest late-delivery percentage grouped by state
 with orden_estado as (
     select  
         o.order_id,
@@ -347,10 +347,10 @@ group by estado
 order by porcentaje_fuera_tiempo desc;
 
 --===================================
--- 3.5. pagos y facturación
+-- 3.5. Payments and Billing
 --===================================
 
--- 3.5.1. ¿qué métodos de pago son más usados por los clientes?
+-- 3.5.1. Which payment methods are most used by customers?
 
 select 
         metodo_pago,
@@ -359,7 +359,7 @@ from vw_info_pagos
 group by metodo_pago
 order by veces_usado desc;
 
--- 3.5.2. ¿cuál es el valor promedio de transacción por tipo de pago?
+-- 3.5.2. What is the average transaction value by payment type?
 
 with agrupar_order_pago as(
     select 
@@ -379,7 +379,7 @@ group by metodo_pago
 order by prom_pago desc
 go
 
--- 3.5.3. ¿qué porcentaje de órdenes se paga en cuotas vs. pago único?
+-- 3.5.3. What percentage of orders are paid in installments versus one payment?
 with pagos_acumulados as (
 select 
         order_id,
@@ -397,10 +397,10 @@ from pagos_acumulados;
 go
 
 --===================================
--- 3.6. satisfacción del cliente
+-- 3.6. Customer Satisfaction
 --===================================
 
--- 3.6.1. ¿cuál es el puntaje promedio de reseñas por estado de la orden?
+-- 3.6.1. What is the average review score by customer state?
 
 with review_estado as (
 select  o.order_id,
@@ -417,14 +417,14 @@ from review_estado
 group by estado;
 
 /*
-NOTA - Puntaje promedio de reseñas por estado:
-- Este query calcula el promedio de review_score agrupado por estado del cliente.
-- Permite identificar en qué estados los clientes muestran mayor o menor satisfacción.
-- Se usa un CTE para organizar la información y luego se agrupa por estado.
-- Resultado: ranking de estados con puntajes promedio de reseñas.
+NOTE - Average review score by state:
+- This query calculates the average review_score grouped by customer state.
+- It identifies the states with the highest and lowest customer satisfaction.
+- A CTE organizes the data before grouping it by state.
+- Result: ranking of states by average review score.
 */
 
--- 3.6.2. ¿qué categorías tienen mayor nivel de devoluciones o reseñas negativas?
+-- 3.6.2. Which categories have the highest level of returns or negative reviews?
 
 
 with agrupar_categoria_review as (
@@ -458,21 +458,21 @@ from puntaje
 order by puntaje_promedio asc;
 
 /*
-NOTA - Categorías con reseñas negativas:
-- Al agrupar por categoría se observaron registros con valores nulos en review_score o categoría. 
-  Por ello, se filtraron únicamente los datos válidos para asegurar consistencia en los resultados.
+NOTE - Categories with negative reviews:
+- Grouping by category revealed null values in review_score or category.
+    Only valid data is therefore included to keep results consistent.
 - En el primer CTE pueden aparecer registros aparentemente duplicados, pero en realidad no lo son: 
-  la tabla order_reviews contiene un review_id que permite identificar múltiples reseñas asociadas 
-  a una misma orden. Cada review_id corresponde a una evaluación distinta, por lo que se considera 
-  un valor independiente.
-- Este comportamiento se corrige al calcular el promedio de review_score por categoría, ya que 
-  el promedio integra todas las reseñas válidas y refleja la tendencia real de satisfacción.
-- El query clasifica las categorías según su puntaje promedio, asignando etiquetas cualitativas 
-  (Excelente, Muy bueno, Bueno, No tan bueno, Malo), lo que facilita interpretar cuáles concentran 
-  mayor nivel de reseñas negativas o devoluciones.
+    the order_reviews table contains a review_id that identifies multiple reviews associated
+    with one order. Each review_id represents a separate evaluation and is treated
+    as an independent value.
+- This behavior is handled by calculating the average review_score by category,
+    integrating all valid reviews to reflect the actual satisfaction trend.
+- The query classifies categories by average score using qualitative labels
+    (Excellent, Very Good, Good, Below Average, Poor), making negative reviews
+    and returns easier to interpret.
 */
 
--- 3.6.3. ¿existe relación entre tiempos de entrega y satisfacción del cliente?
+-- 3.6.3. Is there a relationship between delivery times and customer satisfaction?
 with tiempo_satisfaccion as (
     select  o.order_id,
             c.customer_state,
@@ -509,11 +509,11 @@ group by case
 order by rango_tiempo_entrega
 
 /*
-NOTA - Relación entre tiempos de entrega y satisfacción:
-- Este query agrupa las órdenes en rangos de tiempo de entrega (0-5, 6-10, 11-20, 21-30, 30+ días).
-- Calcula el promedio de días de entrega y el promedio de reseñas en cada rango.
-- Permite observar si entregas rápidas están asociadas a mejores reseñas y si tiempos largos afectan la satisfacción.
-- Se usa count(distinct order_id) para evitar duplicados y asegurar métricas confiables.
+NOTE - Relationship between delivery times and satisfaction:
+- This query groups orders into delivery-time ranges (0-5, 6-10, 11-20, 21-30, 30+ days).
+- It calculates average delivery days and average review scores for each range.
+- It shows whether faster deliveries are associated with better reviews and whether long waits affect satisfaction.
+- count(distinct order_id) prevents duplicates and keeps metrics reliable.
 */
 
 --=========================================

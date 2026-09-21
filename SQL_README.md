@@ -1,9 +1,9 @@
 # 🗄️ Brz Ecommerce — SQL Server Analysis
 
-> **Modelado relacional, vistas analíticas y consultas de negocio sobre +100,000 órdenes de un marketplace brasileño (2016–2018)**  
-> Herramientas: SQL Server · T-SQL · SSMS
+> **Relational modeling, analytical views, and business queries for 100,000+ orders from a Brazilian marketplace (2016–2018)**  
+> Tools: SQL Server · T-SQL · SSMS
 
-**Autor:** Joseph Velasco — Data Analyst
+**Author:** Tushar Rana — Data Analyst
 
 ---
 
@@ -16,7 +16,7 @@
 
 ---
 
-## 📌 Descripción del Proyecto
+## 📌 Project Description
 
 Este proyecto aplica un flujo completo de ingeniería y análisis de datos sobre el **Brazilian E-Commerce Public Dataset by Olist** (Kaggle), construido íntegramente en SQL Server.
 
@@ -31,37 +31,43 @@ El flujo está diseñado en **3 capas progresivas**: Setup → Vistas → Consul
 
 ---
 
-## ⚡ Quick Start — Cómo ejecutar el proyecto
+## ⚡ Quick Start — Running the Project
 
 Este proyecto está pensado para ejecutarse en **SQL Server** con **SSMS**.
 
 Orden recomendado de ejecución:
 
 **1.** Ejecutar el script de creación y carga de la base de datos:
+
 ```
 01_Brz_Ecommerce_Database_Setup.sql
 ```
+
 Crea la base de datos, tablas, claves primarias, foráneas e índices.
 
 **2.** Ejecutar el script de vistas analíticas:
+
 ```
 02_Brz_Ecommerce_Data_Model_Views.sql
 ```
+
 Construye las 6 vistas analíticas utilizadas en el proyecto.
 
 **3.** Ejecutar el script de análisis de negocio:
+
 ```
 03_Brz_Ecommerce_Business_Analysis.sql
 ```
+
 Responde las 18 preguntas de negocio utilizando las vistas creadas.
 
 > ⚠️ Las consultas del análisis dependen de las vistas del paso 2. Ejecuta los scripts en el orden indicado para evitar errores de dependencia.
 
 ---
 
-## 📑 Índice
+## 📑 Table of Contents
 
-### 🧭 Instrucciones de navegación
+### 🧭 Navigation
 
 - Los apartados siguen el flujo completo del proyecto: **Setup → Vistas → Consultas de negocio**.
 - Puedes volver al índice usando `Ctrl+F` y escribiendo **"📑 Índice"**.
@@ -127,7 +133,7 @@ USE Brz_Ecomerce;
 
 **Uso recomendado:** Importar todos los CSV antes de ejecutar las correcciones de llaves y tipos.
 
-> *(Este paso no tiene query directo — se documenta como procedimiento manual en SSMS.)*
+> _(Este paso no tiene query directo — se documenta como procedimiento manual en SSMS.)_
 
 ---
 
@@ -136,6 +142,7 @@ USE Brz_Ecomerce;
 **Objetivo:** Establecer claves primarias y foráneas para garantizar la integridad referencial del modelo.
 
 **Qué incluye:**
+
 - PK en `orders`, `customers`, `products`, `sellers`, `product_category_name_translation`.
 - FK entre `orders → customers`, `order_items → products`, `order_items → sellers`, `order_items → orders`, `order_payments → orders`, `order_reviews → orders`.
 
@@ -188,6 +195,7 @@ ADD CONSTRAINT FK_products_Product_Category_Name FOREIGN KEY (product_category_n
 **Objetivo:** Crear la tabla `Geolocation_ZipCode` para eliminar duplicaciones de códigos postales y relacionar clientes, vendedores y geolocalización con una clave única.
 
 **Qué incluye:**
+
 - Tabla `Geolocation_ZipCode` con PK en `zip_code_prefix`.
 - FK desde `customer`, `sellers` y `geolocation` hacia `Geolocation_ZipCode`.
 
@@ -221,6 +229,7 @@ ADD CONSTRAINT FK_Geolocation_Zipcode FOREIGN KEY (geolocation_zip_code_prefix) 
 **Objetivo:** Optimizar consultas frecuentes mediante índices simples y compuestos diseñados según los patrones de acceso del proyecto.
 
 **Qué incluye:**
+
 - Índices en `customer` (state, city), `orders` (purchase_timestamp, status).
 - Índices en `order_items` (product_id, seller_id, order_id).
 - Índices en `order_payments` (payment_type, payment_value).
@@ -250,7 +259,7 @@ CREATE NONCLUSTERED INDEX IX_Order_Reviews_ReviewID ON order_reviews(review_id);
 CREATE NONCLUSTERED INDEX IX_OrderReviews_Order_Score ON order_reviews(order_id, review_score);
 
 CREATE NONCLUSTERED INDEX IX_Products_Product_Category_Name ON products(product_category_name);
-CREATE NONCLUSTERED INDEX IX_Product_Category_Name_Translation_Product_Category_Name_English 
+CREATE NONCLUSTERED INDEX IX_Product_Category_Name_Translation_Product_Category_Name_English
 ON product_category_name_translation(product_category_name_english);
 
 CREATE NONCLUSTERED INDEX IX_Sellers_Seller_State ON sellers(seller_state);
@@ -298,6 +307,7 @@ SELECT * FROM orders WHERE customer_id NOT IN(SELECT customer_id FROM customer);
 **Qué incluye:** Identificación de orden e ítem, datos de cliente y vendedor, categoría del producto, tipo y valor de pago, costo de flete y puntaje de reseña.
 
 **Supuestos:**
+
 - Los pagos se integran a nivel de orden (no por ítem) para mantener consistencia.
 - Las reseñas se conectan por `order_id`, garantizando que cada orden aporte su evaluación.
 - No aplica agregaciones: es la vista más detallada del modelo.
@@ -306,7 +316,7 @@ SELECT * FROM orders WHERE customer_id NOT IN(SELECT customer_id FROM customer);
 
 ```sql
 CREATE OR ALTER VIEW vw_orders_detail AS
-SELECT 
+SELECT
     o.order_id,
     o.order_status,
     o.order_purchase_timestamp AS fecha_compra,
@@ -351,6 +361,7 @@ GO
 **Qué incluye:** Total de productos comprados, ticket promedio por producto, total gastado en compras y en flete, porcentaje del flete sobre el total de compra y cantidad de reseñas.
 
 **Supuestos:**
+
 - Se eliminó la dependencia de la tabla `geolocation` para evitar duplicados.
 - Se agrupan métricas a nivel de cliente para obtener resultados consistentes.
 
@@ -461,6 +472,7 @@ GO
 **Qué incluye:** Precios mínimos, máximos y promedio, total acumulado de ventas, número de órdenes únicas y unidades vendidas.
 
 **Supuestos:**
+
 - Se usan `LEFT JOIN` para incluir registros incompletos y detectar huecos en la información.
 - Vista refleja datos reales sin duplicaciones.
 
@@ -469,7 +481,7 @@ GO
 ```sql
 CREATE OR ALTER VIEW vw_info_producto AS
 WITH items_unicos AS (
-    SELECT DISTINCT 
+    SELECT DISTINCT
         o.order_id,
         oi.order_item_id,
         oi.product_id,
@@ -483,7 +495,7 @@ WITH items_unicos AS (
     LEFT JOIN products AS p ON p.product_id = oi.product_id
     LEFT JOIN product_category_name_translation AS pc ON pc.product_category_name = p.product_category_name
 )
-SELECT  
+SELECT
     product_id,
     categoria_producto,
     estado_cliente AS estado,
@@ -519,7 +531,7 @@ ORDER BY total_acumulado_real DESC;
 ```sql
 CREATE OR ALTER VIEW vw_info_pagos AS
 WITH agrupar_pago AS (
-    SELECT  
+    SELECT
         o.order_id,
         oi.order_item_id,
         p.payment_type AS metodo_pago,
@@ -544,7 +556,7 @@ GO
 
 -- Ejemplo: ciudad con mayor volumen de pagos por método
 WITH ciudad_top AS (
-    SELECT 
+    SELECT
         metodo_pago,
         ciudad_cliente,
         estado_cliente,
@@ -554,7 +566,7 @@ WITH ciudad_top AS (
     FROM vw_info_pagos
     GROUP BY metodo_pago, ciudad_cliente, estado_cliente
 )
-SELECT 
+SELECT
     metodo_pago,
     ciudad_cliente AS ciudad_mas_vendedora,
     estado_cliente,
@@ -580,14 +592,14 @@ ORDER BY total_pagado_ciudad DESC;
 ```sql
 CREATE OR ALTER VIEW vw_info_zonas AS
 WITH geo_unicos AS (
-    SELECT DISTINCT 
+    SELECT DISTINCT
         g.geolocation_zip_code_prefix,
         g.geolocation_city,
         g.geolocation_state
     FROM geolocation AS g
 ),
 ordenes_unicas AS (
-    SELECT 
+    SELECT
         o.order_id,
         c.customer_id,
         oi.seller_id,
@@ -605,7 +617,7 @@ ordenes_unicas AS (
     INNER JOIN order_payments AS p ON o.order_id = p.order_id
     INNER JOIN order_item AS oi ON o.order_id = oi.order_id
     LEFT JOIN order_reviews AS r ON o.order_id = r.order_id
-    WHERE o.order_delivered_customer_date IS NOT NULL 
+    WHERE o.order_delivered_customer_date IS NOT NULL
       AND o.order_purchase_timestamp IS NOT NULL
       AND DATEDIFF(DAY, o.order_purchase_timestamp, o.order_delivered_customer_date) >= 0
     GROUP BY o.order_id, c.customer_zip_code_prefix, c.customer_id, oi.seller_id
@@ -644,7 +656,7 @@ ORDER BY total_pagado DESC;
 
 ### 3.1 — Clientes y mercado
 
-*Análisis del alcance geográfico y la expansión de la base de usuarios.*
+_Análisis del alcance geográfico y la expansión de la base de usuarios._
 
 ---
 
@@ -658,7 +670,7 @@ ORDER BY total_pagado DESC;
 
 ```sql
 SELECT TOP 10
-    estado, 
+    estado,
     SUM(cant_clientes) AS cant_clientes
 FROM vw_info_zonas
 GROUP BY estado
@@ -679,7 +691,7 @@ ORDER BY SUM(cant_clientes) DESC;
 
 ```sql
 WITH primeras_compras AS (
-    SELECT 
+    SELECT
         customer_id,
         MIN(fecha_compra) AS fecha_primer_compra
     FROM vw_orders_detail
@@ -694,7 +706,7 @@ clientes_mensuales AS (
     GROUP BY YEAR(fecha_primer_compra), MONTH(fecha_primer_compra)
 ),
 clientes_lag AS (
-    SELECT  
+    SELECT
         anio_compra,
         mes_compra,
         nuevos_clientes,
@@ -702,7 +714,7 @@ clientes_lag AS (
     FROM clientes_mensuales
 )
 SELECT *,
-    CASE 
+    CASE
         WHEN clientes_mes_anterior IS NULL THEN NULL
         WHEN clientes_mes_anterior = 0 THEN NULL
         ELSE ((nuevos_clientes - clientes_mes_anterior) * 100.0) / clientes_mes_anterior
@@ -724,7 +736,7 @@ GO
 
 ```sql
 SELECT TOP 10
-    ciudad, 
+    ciudad,
     SUM(cant_clientes) AS cant_clientes
 FROM vw_info_zonas
 GROUP BY ciudad
@@ -737,7 +749,7 @@ ORDER BY SUM(cant_clientes) DESC;
 
 ### 3.2 — Ventas y productos
 
-*Identificación de los motores de ingresos y preferencias del consumidor.*
+_Identificación de los motores de ingresos y preferencias del consumidor._
 
 ---
 
@@ -749,7 +761,7 @@ ORDER BY SUM(cant_clientes) DESC;
 
 ```sql
 -- Categorías con mayor rotación
-SELECT TOP 10 
+SELECT TOP 10
     categoria_producto,
     SUM(total_unidades_vendidas) AS cant_unidades_vendidas
 FROM vw_info_producto
@@ -757,7 +769,7 @@ GROUP BY categoria_producto
 ORDER BY cant_unidades_vendidas DESC;
 
 -- Categorías con menor rotación
-SELECT TOP 10 
+SELECT TOP 10
     categoria_producto,
     SUM(total_unidades_vendidas) AS cant_unidades_vendidas
 FROM vw_info_producto
@@ -777,7 +789,7 @@ ORDER BY cant_unidades_vendidas ASC;
 
 ```sql
 -- Ticket promedio por cliente
-SELECT  
+SELECT
     customer_id,
     SUM(total_compra_cliente) / NULLIF(SUM(total_productos_comprados), 0) AS ticket_promedio_cliente
 FROM vw_info_clientes
@@ -785,7 +797,7 @@ GROUP BY customer_id
 ORDER BY ticket_promedio_cliente DESC;
 
 -- Ticket promedio por orden
-SELECT 
+SELECT
     o.order_id,
     SUM(op.payment_value) / NULLIF(COUNT(oi.order_item_id), 0) AS ticket_promedio
 FROM order_payments AS op
@@ -826,14 +838,14 @@ ORDER BY total_acumulado_menos_flete DESC;
 ```sql
 -- Con CTE
 WITH rankedcategorias AS (
-    SELECT 
+    SELECT
         categoria_producto,
         SUM(total_acumulado_real) AS totalventas,
         ROW_NUMBER() OVER (ORDER BY SUM(total_acumulado_real) DESC) AS rn
     FROM vw_info_producto
     GROUP BY categoria_producto
 )
-SELECT 
+SELECT
     SUM(CASE WHEN rn <= 10 THEN totalventas ELSE 0 END) * 100.0 / SUM(totalventas) AS porcentaje_top10,
     SUM(CASE WHEN rn > 10 THEN totalventas ELSE 0 END) * 100.0 / SUM(totalventas) AS porcentaje_resto
 FROM rankedcategorias;
@@ -844,7 +856,7 @@ GO
 
 ### 3.3 — Vendedores
 
-*Evaluación del ecosistema de socios y eficiencia operativa.*
+_Evaluación del ecosistema de socios y eficiencia operativa._
 
 ---
 
@@ -873,7 +885,7 @@ GROUP BY seller_id;
 
 ```sql
 WITH rango_vendedores AS (
-    SELECT  
+    SELECT
         seller_id,
         SUM(total_ventas) AS total_venta,
         SUM(cant_ordenes) AS cant_ordenes,
@@ -881,7 +893,7 @@ WITH rango_vendedores AS (
     FROM vw_info_vendedores
     GROUP BY seller_id
 )
-SELECT 
+SELECT
     SUM(CASE WHEN rn <= 10 THEN total_venta ELSE 0 END) * 100.0 / SUM(total_venta) AS [% top 10 vendedores],
     SUM(CASE WHEN rn <= 10 THEN cant_ordenes ELSE 0 END) AS [cant. ordenes top 10],
     SUM(CASE WHEN rn > 10 THEN total_venta ELSE 0 END) * 100.0 / SUM(total_venta) AS [% resto de vendedores],
@@ -900,7 +912,7 @@ GO
 
 ```sql
 WITH vendedores AS (
-    SELECT  
+    SELECT
         seller_id,
         DATEDIFF(DAY, fecha_compra, fecha_entrega_cliente) AS dias_de_entrega
     FROM vw_orders_detail
@@ -909,7 +921,7 @@ WITH vendedores AS (
       AND fecha_entrega_cliente IS NOT NULL
       AND DATEDIFF(DAY, fecha_compra, fecha_entrega_cliente) > 0
 )
-SELECT TOP 10 
+SELECT TOP 10
     seller_id,
     AVG(dias_de_entrega) AS promedio_dias_entrega,
     DENSE_RANK() OVER(ORDER BY AVG(dias_de_entrega)) AS ranking
@@ -924,7 +936,7 @@ ORDER BY promedio_dias_entrega ASC;
 
 ### 3.4 — Logística y entregas
 
-*Análisis de cumplimiento de tiempos y distribución geográfica.*
+_Análisis de cumplimiento de tiempos y distribución geográfica._
 
 ---
 
@@ -934,7 +946,7 @@ ORDER BY promedio_dias_entrega ASC;
 
 ```sql
 -- Por estado
-SELECT  
+SELECT
     estado,
     AVG(cant_dias_prom_de_entrega) AS dias_prom_de_entrega
 FROM vw_info_zonas
@@ -942,7 +954,7 @@ GROUP BY estado
 ORDER BY dias_prom_de_entrega;
 
 -- Por categoría de producto
-SELECT  
+SELECT
     categoria_producto,
     AVG(DATEDIFF(DAY, fecha_compra, fecha_entrega_cliente)) AS dia_prom_de_entrega
 FROM vw_orders_detail
@@ -950,7 +962,7 @@ WHERE categoria_producto IS NOT NULL
 GROUP BY categoria_producto;
 
 -- Por estado y categoría combinados
-SELECT  
+SELECT
     estado_cliente,
     categoria_producto,
     AVG(DATEDIFF(DAY, fecha_compra, fecha_entrega_cliente)) AS dia_prom_de_entrega
@@ -968,7 +980,7 @@ GROUP BY estado_cliente, categoria_producto;
 
 ```sql
 WITH tiempo AS (
-    SELECT 
+    SELECT
         order_id,
         DATEDIFF(DAY, order_purchase_timestamp, order_delivered_customer_date) AS tiempo_entrega_dias,
         DATEDIFF(DAY, order_purchase_timestamp, order_estimated_delivery_date) AS tiempo_estimado_dias
@@ -977,7 +989,7 @@ WITH tiempo AS (
       AND order_delivered_customer_date IS NOT NULL
       AND order_estimated_delivery_date IS NOT NULL
 )
-SELECT 
+SELECT
     COUNT(*) AS total_ordenes,
     SUM(CASE WHEN tiempo_entrega_dias <= tiempo_estimado_dias THEN 1 ELSE 0 END) AS ordenes_a_tiempo,
     SUM(CASE WHEN tiempo_entrega_dias > tiempo_estimado_dias THEN 1 ELSE 0 END) AS ordenes_fuera_tiempo,
@@ -997,7 +1009,7 @@ GO
 
 ```sql
 WITH orden_estado AS (
-    SELECT  
+    SELECT
         o.order_id,
         s.seller_state AS estado,
         MIN(DATEDIFF(DAY, o.order_purchase_timestamp, o.order_delivered_customer_date)) AS dias_entrega,
@@ -1010,7 +1022,7 @@ WITH orden_estado AS (
       AND o.order_estimated_delivery_date IS NOT NULL
     GROUP BY o.order_id, s.seller_state
 )
-SELECT 
+SELECT
     estado,
     COUNT(*) AS total_ordenes,
     SUM(CASE WHEN dias_entrega > dias_estimados THEN 1 ELSE 0 END) AS ordenes_fuera_tiempo,
@@ -1026,7 +1038,7 @@ ORDER BY porcentaje_fuera_tiempo DESC;
 
 ### 3.5 — Pagos y facturación
 
-*Análisis de preferencias financieras y modalidades de pago.*
+_Análisis de preferencias financieras y modalidades de pago._
 
 ---
 
@@ -1035,7 +1047,7 @@ ORDER BY porcentaje_fuera_tiempo DESC;
 **Objetivo:** Identificar los métodos de pago más utilizados en las órdenes.
 
 ```sql
-SELECT 
+SELECT
     metodo_pago,
     SUM(veces_usado) AS veces_usado
 FROM vw_info_pagos
@@ -1053,7 +1065,7 @@ ORDER BY veces_usado DESC;
 
 ```sql
 WITH agrupar_order_pago AS (
-    SELECT 
+    SELECT
         o.order_id,
         op.payment_type AS metodo_pago,
         op.payment_value AS valor_pago
@@ -1062,7 +1074,7 @@ WITH agrupar_order_pago AS (
     WHERE op.payment_type IS NOT NULL
       AND op.payment_value IS NOT NULL
 )
-SELECT 
+SELECT
     metodo_pago,
     AVG(valor_pago) AS prom_pago
 FROM agrupar_order_pago
@@ -1081,9 +1093,9 @@ GO
 
 ```sql
 WITH pagos_acumulados AS (
-    SELECT 
+    SELECT
         order_id,
-        COUNT(payment_sequential) AS cantidad_pagos 
+        COUNT(payment_sequential) AS cantidad_pagos
     FROM order_payments
     GROUP BY order_id
 )
@@ -1103,7 +1115,7 @@ GO
 
 ### 3.6 — Satisfacción del cliente
 
-*Correlación entre la operatividad logística y la percepción del usuario.*
+_Correlación entre la operatividad logística y la percepción del usuario._
 
 ---
 
@@ -1113,7 +1125,7 @@ GO
 
 ```sql
 WITH review_estado AS (
-    SELECT  
+    SELECT
         o.order_id,
         c.customer_state AS estado,
         orv.review_score
@@ -1121,7 +1133,7 @@ WITH review_estado AS (
     INNER JOIN customer AS c ON c.customer_id = o.customer_id
     INNER JOIN order_reviews AS orv ON orv.order_id = o.order_id
 )
-SELECT 
+SELECT
     estado,
     AVG(review_score) AS puntaje_promedio
 FROM review_estado
@@ -1142,7 +1154,7 @@ GROUP BY estado;
 
 ```sql
 WITH agrupar_categoria_review AS (
-    SELECT 
+    SELECT
         o.order_id,
         vp.categoria_producto,
         orv.review_score
@@ -1150,18 +1162,18 @@ WITH agrupar_categoria_review AS (
     INNER JOIN order_item AS oi ON oi.order_id = o.order_id
     INNER JOIN vw_info_producto AS vp ON vp.product_id = oi.product_id
     INNER JOIN order_reviews AS orv ON orv.order_id = o.order_id
-    WHERE vp.categoria_producto IS NOT NULL 
-      AND orv.review_score IS NOT NULL 
+    WHERE vp.categoria_producto IS NOT NULL
+      AND orv.review_score IS NOT NULL
 ),
 puntaje AS (
-    SELECT  
+    SELECT
         categoria_producto,
         AVG(review_score) AS puntaje_promedio
     FROM agrupar_categoria_review
     GROUP BY categoria_producto
 )
 SELECT *,
-    CASE 
+    CASE
         WHEN puntaje_promedio = 5 THEN 'Excelente'
         WHEN puntaje_promedio = 4 THEN 'Muy bueno'
         WHEN puntaje_promedio = 3 THEN 'Bueno'
@@ -1180,7 +1192,7 @@ ORDER BY puntaje_promedio ASC;
 
 ```sql
 WITH tiempo_satisfaccion AS (
-    SELECT  
+    SELECT
         o.order_id,
         c.customer_state,
         c.customer_city,
@@ -1194,7 +1206,7 @@ WITH tiempo_satisfaccion AS (
       AND orv.review_score > 0
 )
 SELECT
-    CASE 
+    CASE
         WHEN tiempo_entrega BETWEEN 0 AND 5 THEN '0-5 días'
         WHEN tiempo_entrega BETWEEN 6 AND 10 THEN '6-10 días'
         WHEN tiempo_entrega BETWEEN 11 AND 20 THEN '11-20 días'
@@ -1205,8 +1217,8 @@ SELECT
     AVG(tiempo_entrega) AS prom_tiempo_entrega,
     AVG(review_score) AS prom_review
 FROM tiempo_satisfaccion
-GROUP BY 
-    CASE 
+GROUP BY
+    CASE
         WHEN tiempo_entrega BETWEEN 0 AND 5 THEN '0-5 días'
         WHEN tiempo_entrega BETWEEN 6 AND 10 THEN '6-10 días'
         WHEN tiempo_entrega BETWEEN 11 AND 20 THEN '11-20 días'
@@ -1225,29 +1237,22 @@ ORDER BY rango_tiempo_entrega;
 ```
 📁 Proyecto2-BrzEcommerce/
 │
-├── 📝 README_SQL.md                      ← Este archivo (SQL Server)
-├── 📝 README_BRZ_PowerBI.md              ← Documentación Power BI
-├── 📋 BRZ_Ecommerce_Documentacion.pdf        ← Documentación ejecutiva completa
+├── 📝 SQL_README.md                       ← SQL Server documentation
+├── 📝 README.md                           ← Power BI documentation
+├── 📋 Ecommerce_Documentation.pdf         ← Complete project documentation
 │
 ├── 🗄️ 01_Brz_Ecommerce_Database_Setup.sql
 ├── 🗄️ 02_Brz_Ecommerce_Data_Model_Views.sql
 ├── 🗄️ 03_Brz_Ecommerce_Business_Analysis.sql
 │
 └── 📁 screenshots/
-    ├── Ventas.png
-    ├── Ventas_2.png
-    ├── Ventas_Dark_mode.png
-    ├── Ventas_2_Dark_Mode.png
-    ├── Desempeno.png
-    ├── Desempeno_2.png
-    ├── Desempeno_Dark_Mode.png
-    ├── Desempeno_2_Dark_Mode.png
-    ├── Historico_de_ventas.png
-    ├── Historico_de_ventas_Dark_Mode.png
-    ├── Tabla_Categoria_Productos.png
-    ├── Tabla_Categorias_Productos_Dark_Mode.png
-    ├── Tabla_de_Productos.png
-    └── Tabla_Productos_Dark_Mode.png
+    ├── Sales.png
+    ├── Sales_2.png
+    ├── Performance.png
+    ├── Performance_2.png
+    ├── Sales_History.png
+    ├── Product_Category_Table.png
+    └── Products_Table.png
 ```
 
 ---
@@ -1263,12 +1268,12 @@ ORDER BY rango_tiempo_entrega;
 
 ## 🛠️ Stack Tecnológico
 
-| Herramienta | Aplicación en el Proyecto |
-|---|---|
-| **SQL Server** | Motor de base de datos relacional |
-| **T-SQL** | Modelado, vistas, índices y consultas de negocio |
-| **SSMS** | Entorno de desarrollo y ejecución de scripts |
-| **Markdown** | Documentación técnica y comunicación de hallazgos |
+| Herramienta    | Aplicación en el Proyecto                         |
+| -------------- | ------------------------------------------------- |
+| **SQL Server** | Motor de base de datos relacional                 |
+| **T-SQL**      | Modelado, vistas, índices y consultas de negocio  |
+| **SSMS**       | Entorno de desarrollo y ejecución de scripts      |
+| **Markdown**   | Documentación técnica y comunicación de hallazgos |
 
 ---
 
@@ -1276,7 +1281,7 @@ ORDER BY rango_tiempo_entrega;
 
 ## 🤝 Conectemos
 
-*Si buscas un analista que aporte una visión crítica y humana a tus datos, hablemos.*
+_Si buscas un analista que aporte una visión crítica y humana a tus datos, hablemos._
 
 <br/>
 
