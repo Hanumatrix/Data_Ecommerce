@@ -7,7 +7,7 @@
 
 ---
 
-## 🏷️ Tecnologías
+## 🏷️ Technologies
 
 ![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 ![Power Query](https://img.shields.io/badge/Power_Query-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
@@ -19,10 +19,10 @@
 
 ## 🔗 Report Access
 
-| Resource                   | Link                                                                                                                                                                                                                 |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 📊 **Reporte interactivo** | [Ver reporte en Power BI Service](https://app.powerbi.com/view?r=eyJrIjoiYWRkZDZmNWQtZmM1Ni00OTlhLTllMmMtMzMwMjBlYjRkMTg2IiwidCI6IjE4YzQ0ODRlLWFmYjctNGFjYS04NDM1LWZmYzQwOGY0YjE3NiJ9&pageName=7a6c62f682e264b660a5) |
-| 📦 **Dataset original**    | [Brazilian E-Commerce — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)                                                                                                                         |
+| Resource                  | Link                                                                                                                                                                                                                 |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 📊 **Interactive report** | [View report in Power BI Service](https://app.powerbi.com/view?r=eyJrIjoiYWRkZDZmNWQtZmM1Ni00OTlhLTllMmMtMzMwMjBlYjRkMTg2IiwidCI6IjE4YzQ0ODRlLWFmYjctNGFjYS04NDM1LWZmYzQwOGY0YjE3NiJ9&pageName=7a6c62f682e264b660a5) |
+| 📦 **Original dataset**   | [Brazilian E-Commerce — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)                                                                                                                         |
 
 ---
 
@@ -58,16 +58,16 @@
 
 ## 📌 Project Description
 
-Este proyecto nace a partir de un trabajo previo realizado en **SQL Server**, donde se resolvieron las principales preguntas de negocio mediante consultas y vistas optimizadas. Ese análisis permitió validar la calidad de los datos, comprobar la lógica de negocio y asegurar que las métricas respondieran correctamente a los objetivos planteados.
+This project builds on previous work in **SQL Server**, where the main business questions were answered using optimized queries and views. That analysis validated data quality, business logic, and metric accuracy.
 
-Ahora el proyecto evoluciona hacia **Power BI**, aprovechando el modelo de datos ya diseñado y las consultas previamente resueltas en SQL. La intención no es repetir el trabajo, sino **potenciarlo con visualizaciones interactivas y dashboards dinámicos** que hacen más accesible la información para usuarios de negocio.
+The project now extends into **Power BI**, using the existing data model and SQL analysis. The goal is to **make the results more accessible through interactive visualizations and dynamic dashboards**.
 
-> 📁 El análisis técnico en SQL Server está documentado en el repositorio complementario:  
+> 📁 The SQL Server analysis is documented in the companion repository section:
 > **[Brz Ecommerce — SQL Server Analysis](./SQL_README.md)**
 
 ### What Makes This Project Special?
 
-La conexión directa entre **SQL Server y Power BI vía ODBC** garantiza que los datos lleguen limpios y optimizados, evitando transformaciones innecesarias. El modelo híbrido estrella — con `dim_ordenes_detalles` como hub central — permite navegar entre métricas de orden y métricas de ítem sin duplicar resultados, mientras que las relaciones inactivas con `USERELATIONSHIP` añaden flexibilidad para análisis temporales desde múltiples perspectivas de fecha.
+The direct **SQL Server to Power BI connection through ODBC** delivers clean, optimized data and avoids unnecessary transformations. The hybrid star model uses `dim_ordenes_detalles` as its central hub, allowing order and item metrics to be analyzed without duplicating results. Inactive relationships with `USERELATIONSHIP` support analysis from multiple date perspectives.
 
 ---
 
@@ -75,57 +75,57 @@ La conexión directa entre **SQL Server y Power BI vía ODBC** garantiza que los
 
 ### 🧭 Navigation
 
-- Los apartados siguen el flujo completo del proyecto: **Carga → Limpieza → Modelado → Análisis → Conclusiones**.
-- Puedes volver al índice usando `Ctrl+F` y escribiendo **"📑 Índice"**.
+- The sections follow the project workflow: **Load → Clean → Model → Analyze → Conclude**.
+- Return to the contents with `Ctrl+F` and search for **"📑 Table of Contents"**.
 
 ---
 
-- [1 — KPIs Principales](#1--kpis-principales)
-- [2 — Arquitectura del Proyecto](#2--arquitectura-del-proyecto)
-  - [2.1 — Carga de datos](#21--carga-de-datos)
-  - [2.2 — Limpieza en Power Query](#22--limpieza-en-power-query)
-  - [2.3 — Modelado en Power BI](#23--modelado-en-power-bi)
-    - [Tablas del modelo](#tablas-del-modelo)
-    - [Relaciones](#relaciones)
-    - [Tabla Calendario](#tabla-calendario)
-    - [Ajustes en reseñas y estados de orden](#ajustes-en-reseñas-y-estados-de-orden)
-- [3 — Análisis de Negocio](#3--análisis-de-negocio)
-  - [3.1 — Clientes y mercado](#31--clientes-y-mercado)
-  - [3.2 — Ventas y productos](#32--ventas-y-productos)
-  - [3.3 — Vendedores](#33--vendedores)
-  - [3.4 — Logística y entregas](#34--logística-y-entregas)
-  - [3.5 — Pagos y facturación](#35--pagos-y-facturación)
-  - [3.6 — Satisfacción del cliente](#36--satisfacción-del-cliente)
-- [4 — Próximos Pasos](#4--próximos-pasos)
-- [5 — Conclusiones Finales](#5--conclusiones-finales)
-- [6 — Estructura del Repositorio](#6--estructura-del-repositorio)
+- [1 — Key KPIs](#1--key-kpis)
+- [2 — Project Architecture](#2--project-architecture)
+  - [2.1 — Data Loading](#21--data-loading)
+  - [2.2 — Power Query Cleaning](#22--power-query-cleaning)
+  - [2.3 — Power BI Modeling](#23--power-bi-modeling)
+    - [Model Tables](#model-tables)
+    - [Relationships](#relationships)
+    - [Calendar Table](#calendar-table)
+    - [Review and Order Status Adjustments](#review-and-order-status-adjustments)
+- [3 — Business Analysis](#3--business-analysis)
+  - [3.1 — Customers and Market](#31--customers-and-market)
+  - [3.2 — Sales and Products](#32--sales-and-products)
+  - [3.3 — Sellers](#33--sellers)
+  - [3.4 — Logistics and Delivery](#34--logistics-and-delivery)
+  - [3.5 — Payments and Billing](#35--payments-and-billing)
+  - [3.6 — Customer Satisfaction](#36--customer-satisfaction)
+- [4 — Next Steps](#4--next-steps)
+- [5 — Final Conclusions](#5--final-conclusions)
+- [6 — Repository Structure](#6--repository-structure)
 - [7 — Dataset](#7--dataset)
-- [Contacto](#contacto)
+- [Contact](#contact)
 
 ---
 
-## 1 — KPIs Principales
+## 1 — Key KPIs
 
-| Métrica                            | Valor                           |
-| ---------------------------------- | ------------------------------- |
-| 💰 Ventas Totales                  | $8,700,000                      |
-| 👥 Clientes Únicos                 | 53,000                          |
-| 📦 Volumen de Órdenes              | 54,000                          |
-| 🎫 Ticket Promedio                 | $161.07                         |
-| ✅ SLA de Entrega Cumplido         | 90.8% (89,944 / 99,000 órdenes) |
-| ⭐ Puntaje Promedio de Reseñas     | 4.09 / 5.00                     |
-| 🏪 Concentración Top 10 Vendedores | 7.28% del mercado               |
+| Metric                         | Value                          |
+| ------------------------------ | ------------------------------ |
+| 💰 Total Sales                 | $8,700,000                     |
+| 👥 Unique Customers            | 53,000                         |
+| 📦 Order Volume                | 54,000                         |
+| 🎫 Average Order Value         | $161.07                        |
+| ✅ On-Time Delivery SLA        | 90.8% (89,944 / 99,000 orders) |
+| ⭐ Average Review Score        | 4.09 / 5.00                    |
+| 🏪 Top 10 Seller Concentration | 7.28% of the market            |
 
 ---
 
-## 2 — Arquitectura del Proyecto
+## 2 — Project Architecture
 
 ```
 SQL Server (Brz_Ecommerce)
         │
-        ▼ Conexión ODBC + SQL nativo
+        ▼ ODBC connection + native SQL
 ┌─────────────────────────┐
-│   POWER QUERY (ETL)     │  ← Limpieza, normalización y tabla Calendario
+│   POWER QUERY (ETL)     │  ← Cleaning, normalization, and calendar table
 │  dim_ordenes_detalles   │
 │  dim_cliente            │
 │  dim_vendedores         │
@@ -137,57 +137,57 @@ SQL Server (Brz_Ecommerce)
            │
            ▼
 ┌─────────────────────────┐
-│  MODELO DE DATOS        │  ← Modelo híbrido estrella + medidas DAX
-│  Motor VertiPaq         │  ← Motor analítico interno de Power BI
+│  DATA MODEL             │  ← Hybrid star model + DAX measures
+│  VertiPaq Engine        │  ← Power BI internal analytics engine
 │  Hub: dim_ord_detalles  │
-│  Relaciones activas     │
-│  Relaciones inactivas   │
+│  Active relationships   │
+│  Inactive relationships │
 └──────────┬──────────────┘
            │
            ▼
 ┌─────────────────────────┐
-│  DASHBOARDS             │  ← Visualizaciones interactivas
-│  Dashboard Ventas       │
-│  Dashboard Desempeño    │
-│  Histórico de Ventas    │
-│  Detalle Productos      │
-│  Detalle Categorías     │
+│  DASHBOARDS             │  ← Interactive visualizations
+│  Sales Dashboard        │
+│  Performance Dashboard  │
+│  Sales History          │
+│  Product Details        │
+│  Category Details       │
 └─────────────────────────┘
 ```
 
 ---
 
-### 2.1 — Carga de datos
+### 2.1 — Data Loading
 
-- La carga se realizó mediante una **conexión ODBC** hacia SQL Server desde la base de datos **Brz_Ecommerce**.
-- Los datos se tomaron directamente con **consultas SQL ya optimizadas** (las 6 vistas analíticas del proyecto SQL), lo que permitió:
-  - Reducir la cantidad de pasos de procesamiento en Power BI.
-  - Evitar transformaciones innecesarias en Power Query.
-  - Garantizar que los datos lleguen limpios y listos para el modelado.
-- Esta estrategia asegura un flujo más eficiente y mejor rendimiento del modelo.
-
----
-
-### 2.2 — Limpieza en Power Query
-
-- Se eliminaron columnas innecesarias para optimizar el rendimiento del modelo.
-- Se normalizaron nombres de estados, ciudades y categorías de producto.
-- Se revisaron y trataron valores nulos en `seller_id`, categorías de producto y reseñas.
-- Se ajustaron tipos de datos:
-  - **Fechas:** `order_purchase_timestamp`, `order_delivered_customer_date`
-  - **Numéricos:** `payment_value`, `freight_value`
-  - **Texto:** `estado`, `ciudad`, `categoria_producto`
+- Data was loaded through an **ODBC connection** to SQL Server from the **Brz_Ecommerce** database.
+- Data was retrieved with **optimized SQL queries** from the six analytical views, which allowed the project to:
+  - Reduce processing steps in Power BI.
+  - Avoid unnecessary Power Query transformations.
+  - Deliver clean data ready for modeling.
+- This approach provides a more efficient workflow and better model performance.
 
 ---
 
-### 2.3 — Modelado en Power BI
+### 2.2 — Power Query Cleaning
 
-El modelo evolucionó de una estrella clásica a una **arquitectura híbrida** centrada en `dim_ordenes_detalles` como hub central. Esta tabla concentra clientes, vendedores, fechas, status y métricas de reseñas, evitando duplicaciones y simplificando el análisis.
+- Unnecessary columns were removed to improve model performance.
+- State, city, and product-category names were standardized.
+- Null values in `seller_id`, product categories, and reviews were reviewed and handled.
+- Data types were adjusted:
+  - **Dates:** `order_purchase_timestamp`, `order_delivered_customer_date`
+  - **Numeric:** `payment_value`, `freight_value`
+  - **Text:** `estado`, `ciudad`, `categoria_producto`
 
-#### Tablas del modelo
+---
+
+### 2.3 — Power BI Modeling
+
+The model evolved from a classic star schema into a **hybrid architecture** centered on `dim_ordenes_detalles`. This hub contains customer, seller, date, status, and review metrics, reducing duplication and simplifying analysis.
+
+#### Model Tables
 
 **🟦 Fact Table — `fact_orders_items`**  
-Tabla de hechos con granularidad por ítem vendido en cada orden.
+Fact table at the granularity of each item sold in an order.
 
 - `order_item_id`
 - `order_id`
@@ -200,8 +200,8 @@ Tabla de hechos con granularidad por ítem vendido en cada orden.
 
 ---
 
-**🟩 Dimensión central — `dim_ordenes_detalles`**  
-Hub central del modelo. Concentra información de órdenes, fechas, status y métricas de reseñas.
+**🟩 Central Dimension — `dim_ordenes_detalles`**  
+Central model hub. Contains order information, dates, status, and review metrics.
 
 - `order_id`
 - `customer_id`
@@ -220,8 +220,8 @@ Hub central del modelo. Concentra información de órdenes, fechas, status y mé
 
 ---
 
-**🟩 Dimensión — `dim_cliente`**  
-Información geográfica y demográfica del cliente.
+**🟩 Dimension — `dim_cliente`**  
+Customer geographic and demographic information.
 
 - `customer_id`
 - `customer_unique_id`
@@ -233,8 +233,8 @@ Información geográfica y demográfica del cliente.
 
 ---
 
-**🟩 Dimensión — `dim_vendedores`**  
-Información del vendedor.
+**🟩 Dimension — `dim_vendedores`**  
+Seller information.
 
 - `seller_id`
 - `seller_city`
@@ -243,16 +243,16 @@ Información del vendedor.
 
 ---
 
-**🟩 Dimensión — `dim_productos`**  
-Catálogo de productos.
+**🟩 Dimension — `dim_productos`**  
+Product catalog.
 
 - `product_id`
 - `product_category`
 
 ---
 
-**🟩 Pagos — `dim_ordenes_pago`**  
-Detalle de pagos por orden.
+**🟩 Payments — `dim_ordenes_pago`**  
+Payment details by order.
 
 - `order_id`
 - `payment_sequential`
@@ -261,8 +261,8 @@ Detalle de pagos por orden.
 
 ---
 
-**📅 Tabla — `Tabla_Calendario`**  
-Tabla de fechas para análisis temporal e inteligencia de tiempo.
+**📅 Table — `Tabla_Calendario`**  
+Date table for temporal analysis and time intelligence.
 
 - `fecha` / `fechask`
 - `año` / `mes` / `mescorto`
@@ -274,272 +274,271 @@ Tabla de fechas para análisis temporal e inteligencia de tiempo.
 
 ---
 
-#### Relaciones
+#### Relationships
 
-**Relaciones activas (todas 1:N):**
+**Active relationships (all 1:N):**
 
 - **dim_cliente (1)** → **dim_ordenes_detalles (N)**
 - **dim_vendedores (1)** → **dim_ordenes_detalles (N)**
 - **dim_productos (1)** → **fact_orders_items (N)**
 - **dim_ordenes_detalles (1)** → **fact_orders_items (N)**
 - **dim_ordenes_pago (N)** → **dim_ordenes_detalles (1)**
-- **Tabla_Calendario (1)** → **dim_ordenes_detalles (N)** — vía `fecha_compra`
+- **Tabla_Calendario (1)** → **dim_ordenes_detalles (N)** — through `fecha_compra`
 
-**Relaciones inactivas** _(se activan con `USERELATIONSHIP` en medidas específicas)_:
+**Inactive relationships** _(activated with `USERELATIONSHIP` in specific measures)_:
 
 - **dim_cliente (1)** → **fact_orders_items (N)**
 - **dim_vendedores (1)** → **fact_orders_items (N)**
-- **Tabla_Calendario (1)** → **dim_ordenes_detalles (N)** — vía `order_delivered_customer_date`
-- **Tabla_Calendario (1)** → **dim_ordenes_detalles (N)** — vía `order_approved_at`
+- **Tabla_Calendario (1)** → **dim_ordenes_detalles (N)** — through `order_delivered_customer_date`
+- **Tabla_Calendario (1)** → **dim_ordenes_detalles (N)** — through `order_approved_at`
 
 ---
 
-#### Tabla Calendario
+#### Calendar Table
 
-Para habilitar funciones de inteligencia de tiempo (YTD, YoY, MTD), se creó la `Tabla_Calendario` en Power Query basada en la columna `fecha_compra`.
+To enable time-intelligence functions (YTD, YoY, MTD), `Tabla_Calendario` was created in Power Query from the `fecha_compra` column.
 
-- **Relación activa:** `Tabla_Calendario[Fecha]` → `dim_ordenes_detalles[fecha_compra]`
-- Las relaciones inactivas hacia `order_delivered_customer_date` y `order_approved_at` permiten análisis desde la perspectiva de entrega o aprobación usando `USERELATIONSHIP`.
-- Incluye jerarquías completas: Año, Trimestre, Mes, Semana, Día y columnas auxiliares de inicio/fin de mes.
-
----
-
-#### Ajustes en reseñas y estados de orden
-
-Durante el modelado se realizaron cambios importantes para simplificar el modelo y mejorar la legibilidad:
-
-**Centralización de reseñas en `dim_ordenes_detalles`:**
-
-- Se deshabilitó la carga directa de la tabla `db_ordenes_reviews`.
-- Se agruparon las reseñas por `order_id` y se calcularon métricas agregadas:
-  - `AvgReviewScore` → Promedio de reseñas por orden.
-  - `CountReviews` → Cantidad de reseñas por orden.
-  - `MinReviewScore` / `MaxReviewScore` → Reseña mínima y máxima por orden.
-- Estas columnas se integraron en `dim_ordenes_detalles`, evitando relaciones adicionales y reduciendo la cardinalidad del modelo.
-
-**Manejo de valores nulos:**
-
-- Se mantuvieron los valores `null` en métricas de reseñas para no distorsionar promedios y sumas.
-- Los `null` permiten identificar órdenes canceladas o sin reseña en combinación con `order_status`.
-
-**Traducción de estados de orden (`order_status`):**
-
-| Valor original | Traducción    |
-| -------------- | ------------- |
-| `approved`     | Aprobado      |
-| `canceled`     | Cancelado     |
-| `created`      | Creado        |
-| `delivered`    | Entregado     |
-| `invoiced`     | Facturado     |
-| `processing`   | En Proceso    |
-| `shipped`      | Enviado       |
-| `unavailable`  | No Disponible |
+- **Active relationship:** `Tabla_Calendario[Fecha]` → `dim_ordenes_detalles[fecha_compra]`
+- Inactive relationships to `order_delivered_customer_date` and `order_approved_at` support delivery- and approval-date analysis with `USERELATIONSHIP`.
+- It includes complete hierarchies: year, quarter, month, week, day, and auxiliary month-start and month-end columns.
 
 ---
 
-## 3 — Análisis de Negocio
+#### Review and Order Status Adjustments
 
-### 3.1 — Clientes y mercado
+The following modeling changes simplified the model and improved readability:
 
-_Análisis del alcance geográfico y la expansión de la base de usuarios._
+**Centralized reviews in `dim_ordenes_detalles`:**
 
-**3.1.1 — Concentración por estado:**
+- Direct loading of `db_ordenes_reviews` was disabled.
+- Reviews were grouped by `order_id` and aggregated metrics were calculated:
+  - `AvgReviewScore` → Average reviews per order.
+  - `CountReviews` → Number of reviews per order.
+  - `MinReviewScore` / `MaxReviewScore` → Minimum and maximum review per order.
+- These columns were integrated into `dim_ordenes_detalles`, avoiding extra relationships and reducing model cardinality.
 
-| Estado | Clientes Únicos |
-| ------ | --------------- |
-| SP     | 40,300          |
-| RJ     | 12,380          |
-| MG     | 11,259          |
+**Null value handling:**
 
-> **Insight:** El mercado está fuertemente liderado por la región sureste
-> de Brasil. SP concentra el ~42% del total de clientes únicos, seguido
-> por RJ y MG. Oportunidad de expansión en el norte y noreste, regiones
-> con baja penetración y alta población potencial.
+- `null` values were retained in review metrics so averages and sums are not distorted.
+- `null` values help identify canceled or unreviewed orders when combined with `order_status`.
 
-**3.1.2 — Crecimiento de nuevos clientes:**
+**Order status translation (`order_status`):**
 
-- 🚀 **Periodo 2016–2017:** Crecimiento explosivo del **13,308.9%** — fase de escalado del marketplace.
-- 📈 **Periodo 2017–2018:** Crecimiento sostenido del **20.7%** — señal de consolidación en el mercado.
-
-**3.1.3 — Ciudades con mayor volumen de venta:**
-
-| Ciudad         | Volumen de Venta |
-| -------------- | ---------------- |
-| São Paulo      | $2,200,000       |
-| Rio de Janeiro | $1,160,000       |
-| Belo Horizonte | $421,770         |
-| Brasília       | $354,422         |
-| Curitiba       | $247,390         |
+| Original value | Translation |
+| -------------- | ----------- |
+| `approved`     | Approved    |
+| `canceled`     | Canceled    |
+| `created`      | Created     |
+| `delivered`    | Delivered   |
+| `invoiced`     | Invoiced    |
+| `processing`   | Processing  |
+| `shipped`      | Shipped     |
+| `unavailable`  | Unavailable |
 
 ---
 
-### 3.2 — Ventas y productos
+## 3 — Business Analysis
 
-_Identificación de los motores de ingresos y preferencias del consumidor._
+### 3.1 — Customers and Market
 
-**3.2.1 — Categorías con mayor rotación (Top 5):**
+_Analysis of geographic reach and user-base expansion._
 
-| Categoría             | Unidades Vendidas |
-| --------------------- | ----------------- |
-| bed_bath_table        | 11,115            |
-| health_beauty         | 9,670             |
-| sports_leisure        | 8,641             |
-| furniture_decor       | 8,334             |
-| computers_accessories | 7,827             |
+**3.1.1 — Concentration by state:**
 
-**3.2.2 — Ticket promedio por cliente:** $161.07
+| State | Unique Customers |
+| ----- | ---------------- |
+| SP    | 40,300           |
+| RJ    | 12,380           |
+| MG    | 11,259           |
 
-**3.2.3 — Productos de mayor valor de venta:**
+> **Insight:** The market is strongly led by Brazil's Southeast region.
+> SP represents approximately 42% of unique customers, followed by RJ and MG.
+> The North and Northeast offer expansion opportunities because of lower penetration and large population potential.
 
-| SKU del Producto                   | Venta Total |
+**3.1.2 — New Customer Growth:**
+
+- 🚀 **2016–2017 period:** Explosive **13,308.9%** growth during marketplace scaling.
+- 📈 **2017–2018 period:** Sustained **20.7%** growth, indicating market consolidation.
+
+**3.1.3 — Cities with the Highest Sales Volume:**
+
+| City           | Sales Volume |
+| -------------- | ------------ |
+| São Paulo      | $2,200,000   |
+| Rio de Janeiro | $1,160,000   |
+| Belo Horizonte | $421,770     |
+| Brasília       | $354,422     |
+| Curitiba       | $247,390     |
+
+---
+
+### 3.2 — Sales and Products
+
+_Identification of revenue drivers and consumer preferences._
+
+**3.2.1 — Highest-Turnover Categories (Top 5):**
+
+| Category              | Units Sold |
+| --------------------- | ---------- |
+| bed_bath_table        | 11,115     |
+| health_beauty         | 9,670      |
+| sports_leisure        | 8,641      |
+| furniture_decor       | 8,334      |
+| computers_accessories | 7,827      |
+
+**3.2.2 — Average Order Value per Customer:** $161.07
+
+**3.2.3 — Highest-Value Products:**
+
+| Product SKU                        | Total Sales |
 | ---------------------------------- | ----------- |
 | `bb50f2e236e5eea0100680137654686c` | $63,885.00  |
 | `6cdd53843498f92890544667809f1595` | $54,730.20  |
 | `d6160fb7873f184099d9bc95e30376af` | $48,899.34  |
 
-**3.2.4 — Estacionalidad y comportamiento temporal:**
+**3.2.4 — Seasonality and Time-Based Behavior:**
 
-- **Picos de venta anual:** marzo a junio concentra el mayor volumen de transacciones.
-- **Dinámica semanal:** los días de mayor actividad comercial son de lunes a jueves.
-- **El "Efecto Noviembre":** los viernes de noviembre se convierten en los días de mayor venta y mayor captación de nuevos clientes, atribuido al impacto del **Black Friday**.
+- **Annual sales peaks:** March through June contains the highest transaction volume.
+- **Weekly pattern:** Monday through Thursday are the most active sales days.
+- **The November effect:** Fridays in November become the strongest sales and new-customer acquisition days, driven by **Black Friday**.
 
-> **Implicación operativa:** el Black Friday exige planificación logística diferenciada. Se recomienda pre-posicionar inventario y ampliar capacidad las 2 semanas previas al último viernes de noviembre.
-
----
-
-### 3.3 — Vendedores
-
-_Evaluación del ecosistema de socios y eficiencia operativa._
-
-**3.3.1 — Ranking de órdenes por vendedor:**
-
-El vendedor líder (`id:6560211a19b47992c3666cc44a7e94c0`) gestiona **1,841 órdenes**, seguido por el segundo lugar (`id:4a3ca9315b744ce9f8e9374361493884`) con 1,754.
-
-**3.3.2 — Nivel de concentración del mercado:**
-
-El Top 10 de vendedores concentra solo el **7.28%** del mercado.
-
-> **Insight:** Al ser menor al 10%, el marketplace demuestra una competitividad sana y baja dependencia de vendedores individuales. Esto reduce el riesgo operativo y beneficia al consumidor final.
-
-**3.3.3 — Desempeño en tiempos de entrega:**
-
-- **Mejor vendedor:** `d13e50eaa47b4cbe9eb81465865d8cfc` con **5 días** promedio de entrega.
-- **Promedio eficiente:** los mejores vendedores promedian **6.49 días**, frente a la media general de **12.5 días**.
+> **Operational implication:** Black Friday requires specialized logistics planning. Inventory should be positioned in advance and capacity expanded during the two weeks before the final Friday of November.
 
 ---
 
-### 3.4 — Logística y entregas
+### 3.3 — Sellers
 
-_Análisis de cumplimiento de tiempos y distribución geográfica._
+_Evaluation of the partner ecosystem and operational efficiency._
 
-**3.4.1 — Tiempo promedio de entrega por estado:**
+**3.3.1 — Orders per Seller Ranking:**
 
-- **Mínimo:** 8.70 días — Estado **SP**
-- **Máximo:** 29.34 días — Estado **RR**
+The leading seller (`id:6560211a19b47992c3666cc44a7e94c0`) handles **1,841 orders**, followed by the second-ranked seller (`id:4a3ca9315b744ce9f8e9374361493884`) with 1,754.
 
-**3.4.2 — Órdenes dentro del tiempo estimado (SLA):**
+**3.3.2 — Market Concentration:**
 
-De 99,000 órdenes totales, **89,944 (90.8%)** se entregaron a tiempo.
+The top 10 sellers account for only **7.28%** of the market.
 
-**3.4.3 — Estados con mayor índice de retraso:**
+> **Insight:** Because it is below 10%, the marketplace shows healthy competition and low dependence on individual sellers. This reduces operational risk and benefits customers.
 
-| Estado | % de Retraso |
-| ------ | ------------ |
-| AL     | 21.41%       |
-| MA     | 17.43%       |
-| SE     | 15.22%       |
+**3.3.3 — Delivery-Time Performance:**
 
-> **Foco de atención:** los estados del noreste presentan tasas de retraso muy por encima del promedio nacional (9.2%). Se recomienda evaluar alianzas con operadores logísticos regionales o establecer centros de distribución intermedios en esa zona.
+- **Best seller:** `d13e50eaa47b4cbe9eb81465865d8cfc` with an average delivery time of **5 days**.
+- **Efficient average:** the best sellers average **6.49 days**, compared with the overall average of **12.5 days**.
 
 ---
 
-### 3.5 — Pagos y facturación
+### 3.4 — Logistics and Delivery
 
-_Análisis de preferencias financieras y modalidades de pago._
+_Analysis of delivery-time compliance and geographic distribution._
 
-**3.5.1 — Métodos de pago más utilizados:**
+**3.4.1 — Average Delivery Time by State:**
 
-El sistema de pagos está dominado por medios electrónicos.
+- **Minimum:** 8.70 days — State **SP**
+- **Maximum:** 29.34 days — State **RR**
 
-- **Tarjeta de Crédito:** método preferido por la gran mayoría de los usuarios.
-- **Boleto Bancario:** segunda opción más relevante.
+**3.4.2 — Orders Delivered Within the Estimated Time (SLA):**
 
-**3.5.2 — Valor promedio de transacción por tipo de pago:**
+Of 99,000 total orders, **89,944 (90.8%)** were delivered on time.
 
-| Método de Pago | Ticket Promedio |
-| -------------- | --------------- |
-| Credit Card    | $163.32         |
-| Debit Card     | $142.57         |
-| Boleto         | $142.57         |
-| Voucher        | $65.70          |
+**3.4.3 — States with the Highest Delay Rate:**
 
-> **Insight:** los clientes que usan tarjeta de crédito realizan compras de mayor valor que los demás métodos, lo que abre una oportunidad de personalización de ofertas por método de pago.
+| State | Delay Rate |
+| ----- | ---------- |
+| AL    | 21.41%     |
+| MA    | 17.43%     |
+| SE    | 15.22%     |
 
-**3.5.3 — Modalidad: Pago único vs. cuotas:**
-
-| Modalidad      | % de Órdenes |
-| -------------- | ------------ |
-| Pago Único     | 96.94%       |
-| Pago en Cuotas | 3.06%        |
+> **Focus area:** Northeast states have delay rates well above the national average (9.2%). Regional logistics partnerships or intermediate distribution centers should be evaluated.
 
 ---
 
-### 3.6 — Satisfacción del cliente
+### 3.5 — Payments and Billing
 
-_Correlación entre la operatividad logística y la percepción del usuario._
+_Analysis of payment preferences and payment methods._
 
-**3.6.1 — Reseñas negativas por estatus de orden:**
+**3.5.1 — Most-Used Payment Methods:**
 
-Se identificó un volumen crítico de reseñas negativas en órdenes con estatus **"En Proceso"**.
+Electronic methods dominate the payment system.
 
-> **Insight clave:** el problema real de insatisfacción ocurre durante el procesamiento interno de la orden, incluso **antes** de que el paquete sea entregado al transportista. Esto indica una falla operativa interna, no logística externa.
+- **Credit Card:** preferred by most users.
+- **Boleto Bancario:** the second most relevant option.
 
-**3.6.2 — Relación: tiempo de entrega vs. satisfacción:**
+**3.5.2 — Average Transaction Value by Payment Type:**
 
-| Estado | Días Promedio Entrega | Puntaje Promedio |
-| ------ | --------------------- | ---------------- |
-| AM     | 26.36 días            | 4.21 ⭐          |
-| RR     | 29.34 días            | 3.61 ⭐          |
+| Payment Method | Average Order Value |
+| -------------- | ------------------- |
+| Credit Card    | $163.32             |
+| Debit Card     | $142.57             |
+| Boleto         | $142.57             |
+| Voucher        | $65.70              |
 
-> **Conclusión:** el tiempo de entrega influye, pero **la calidad de la atención durante la espera puede mitigar el impacto de una entrega tardía**. AM entrega tarde pero bien atendido; RR entrega tarde y mal gestionado.
+> **Insight:** Credit-card customers make higher-value purchases than customers using other methods, creating an opportunity for payment-method-based offers.
 
-**3.6.3 — Desempeño general de satisfacción:**
+**3.5.3 — Payment Mode: Single Payment vs. Installments:**
 
-El puntaje promedio en transacciones entregadas es **4.09 / 5.00**, con el 57% de las reseñas en puntaje máximo (5 estrellas). Hay oportunidades claras de mejora en los centros logísticos del Norte y Noreste.
-
----
-
-## 4 — Próximos Pasos
-
-_Roadmap estratégico para escalar el proyecto._
-
-- **🛡️ Implementación de RLS (Row Level Security):** configurar seguridad a nivel de fila para que cada vendedor acceda únicamente a sus propias métricas en un entorno multi-usuario.
-- **⚡ Automatización de alertas:** crear flujos en Power Automate que notifiquen al equipo de logística cuando el SLA en estados críticos (AL, MA) baje del 85%.
-- **📈 Expansión del modelo:** incorporar datos de costos de adquisición de clientes (CAC) y marketing para calcular el ROI real por categoría de producto.
-- **📊 Página de Executive Summary:** una sola pantalla con los 5 hallazgos más importantes en lenguaje de negocio, sin gráficos complejos, orientada a audiencia gerencial.
-- **🔧 Reclasificación de `dim_ordenes_pago`:** mover a fact table para mejorar la integridad del modelo dimensional.
+| Payment Mode   | % of Orders |
+| -------------- | ----------- |
+| Single Payment | 96.94%      |
+| Installments   | 3.06%       |
 
 ---
 
-## 5 — Conclusiones Finales
+### 3.6 — Customer Satisfaction
 
-El proyecto **Brz Ecommerce** demuestra una integración exitosa entre la ingeniería de datos en SQL Server y la visualización estratégica en Power BI. A través del procesamiento de más de **100,000 registros**, se logró:
+_Correlation between logistics operations and customer perception._
 
-1. **Identificar patrones de estacionalidad:** el comportamiento de compra cambia drásticamente en noviembre, exigiendo una logística diferenciada para los viernes de ese mes.
-2. **Detectar ineficiencias internas:** la insatisfacción del cliente en el Norte/Noreste no es solo por transporte — el estado "En Proceso" es la mayor fuente de reseñas negativas.
-3. **Validar la salud del marketplace:** la baja concentración del Top 10 de vendedores (7.28%) confirma un ecosistema competitivo y estable, con bajo riesgo de dependencia.
+**3.6.1 — Negative Reviews by Order Status:**
+
+A critical volume of negative reviews was identified for orders with **"Processing"** status.
+
+> **Key insight:** dissatisfaction occurs during internal order processing, even **before** the package reaches the carrier. This indicates an internal operational issue rather than an external logistics issue.
+
+**3.6.2 — Relationship: Delivery Time vs. Satisfaction:**
+
+| State | Average Delivery Days | Average Score |
+| ----- | --------------------- | ------------- |
+| AM    | 26.36 days            | 4.21 ⭐       |
+| RR    | 29.34 days            | 3.61 ⭐       |
+
+> **Conclusion:** delivery time matters, but **the quality of service during the wait can mitigate the impact of a late delivery**. AM delivers late but provides good service; RR delivers late with poorer management.
+
+**3.6.3 — Overall Satisfaction Performance:**
+
+The average score for delivered transactions is **4.09 / 5.00**, with 57% of reviews receiving the maximum score of five stars. Logistics centers in the North and Northeast have clear opportunities for improvement.
 
 ---
 
-## 🛠️ Stack Tecnológico
+## 4 — Next Steps
 
-| Herramienta         | Aplicación en el Proyecto                                             |
-| ------------------- | --------------------------------------------------------------------- |
-| **SQL Server**      | ETL, limpieza, vistas analíticas y validación de lógica de negocio    |
-| **Power BI**        | Modelado dimensional híbrido, DAX avanzado y diseño de UI/UX          |
-| **Power Query (M)** | Limpieza, normalización, tabla Calendario y centralización de reseñas |
-| **DAX**             | KPIs, YoY, YTD, concentración de mercado, USERELATIONSHIP             |
-| **Markdown**        | Documentación técnica y comunicación de hallazgos                     |
+_Strategic roadmap for scaling the project._
+
+- **🛡️ RLS implementation (Row Level Security):** configure row-level security so each seller can access only their own metrics in a multi-user environment.
+- **⚡ Alert automation:** create Power Automate flows that notify logistics when the SLA in critical states (AL, MA) falls below 85%.
+- **📈 Model expansion:** add customer acquisition cost (CAC) and marketing data to calculate actual ROI by product category.
+- **📊 Executive Summary page:** create one screen with the five most important business findings for management.
+- **🔧 Reclassify `dim_ordenes_pago`:** move it to a fact table to improve dimensional-model integrity.
+
+---
+
+## 5 — Final Conclusions
+
+The **Brz Ecommerce** project demonstrates successful integration between SQL Server data engineering and strategic Power BI visualization. Processing more than **100,000 records** made it possible to:
+
+1. **Identify seasonality patterns:** buying behavior changes sharply in November, requiring specialized logistics for Fridays in that month.
+2. **Detect internal inefficiencies:** dissatisfaction in the North and Northeast is not caused only by transportation; the "Processing" status is the largest source of negative reviews.
+3. **Validate marketplace health:** low top-10 seller concentration (7.28%) confirms a competitive, stable ecosystem with low dependency risk.
+
+---
+
+## 🛠️ Technology Stack
+
+| Tool                | Project Application                                                |
+| ------------------- | ------------------------------------------------------------------ |
+| **SQL Server**      | ETL, cleaning, analytical views, and business-logic validation     |
+| **Power BI**        | Hybrid dimensional modeling, advanced DAX, and UI/UX design        |
+| **Power Query (M)** | Cleaning, normalization, calendar table, and review centralization |
+| **DAX**             | KPIs, YoY, YTD, market concentration, and USERELATIONSHIP          |
+| **Markdown**        | Technical documentation and communication of findings              |
 
 ---
 
@@ -570,16 +569,16 @@ El proyecto **Brz Ecommerce** demuestra una integración exitosa entre la ingeni
 
 ## 7 — Dataset
 
-- **Fuente:** [Brazilian E-Commerce Public Dataset by Olist — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-- **Período:** Septiembre 2016 – Octubre 2018
-- **Registros:** 99,441 órdenes / 112,650 ítems
-- **Tablas originales:** orders, customers, order_items, order_payments, order_reviews, products, sellers, geolocation, product_category_name_translation.
+- **Source:** [Brazilian E-Commerce Public Dataset by Olist — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+- **Period:** September 2016 – October 2018
+- **Records:** 99,441 orders / 112,650 items
+- **Original tables:** orders, customers, order_items, order_payments, order_reviews, products, sellers, geolocation, product_category_name_translation.
 
 ---
 
-## 📬 Contacto
+## 📬 Contact
 
-Si buscas un analista enfocado en resolver problemas de negocio mediante datos limpios y visualizaciones estratégicas, ¡hablemos!
+For business problem-solving through clean data and strategic visualizations, get in touch.
 
 <div align="center">
 
@@ -587,14 +586,14 @@ Si buscas un analista enfocado en resolver problemas de negocio mediante datos l
 [![Portafolio](https://img.shields.io/badge/🌐_Portafolio-0B2545?style=for-the-badge)](https://sites.google.com/view/joseph-velasco-data-analyst/inicio)
 [![GitHub](https://img.shields.io/badge/🐙_GitHub-181717?style=for-the-badge)](https://github.com/DatajosephVe)
 [![Email](https://img.shields.io/badge/📧_Email-D14836?style=for-the-badge)](mailto:josephvelasco2223@gmail.com)
-[![CV](https://img.shields.io/badge/📄_Descargar_CV-134074?style=for-the-badge)](https://drive.google.com/file/d/1TG7yL_QXA8ul9wR1ELk41zo_BYcCbFgc/view?usp=sharing)
+[![CV](https://img.shields.io/badge/📄_Download_CV-134074?style=for-the-badge)](https://drive.google.com/file/d/1TG7yL_QXA8ul9wR1ELk41zo_BYcCbFgc/view?usp=sharing)
 
-📍 Venezuela 🇻🇪 · Disponible para trabajo remoto
+📍 Venezuela 🇻🇪 · Available for remote work
 
 </div>
 
 ---
 
-> **"Transformando datos complejos en claridad para el negocio."**
+> **"Turning complex data into business clarity."**
 
 ---
