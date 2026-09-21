@@ -100,7 +100,6 @@ The direct **SQL Server to Power BI connection through ODBC** delivers clean, op
 - [5 — Final Conclusions](#5--final-conclusions)
 - [6 — Repository Structure](#6--repository-structure)
 - [7 — Dataset](#7--dataset)
-- [Contact](#contact)
 
 ---
 
@@ -575,22 +574,6 @@ The **Brz Ecommerce** project demonstrates successful integration between SQL Se
 - **Original tables:** orders, customers, order_items, order_payments, order_reviews, products, sellers, geolocation, product_category_name_translation.
 
 ---
-
-## 📬 Contact
-
-For business problem-solving through clean data and strategic visualizations, get in touch.
-
-<div align="center">
-
-[![LinkedIn](https://img.shields.io/badge/💼_LinkedIn-0A66C2?style=for-the-badge)](https://linkedin.com/in/joseph-velasco)
-[![Portafolio](https://img.shields.io/badge/🌐_Portafolio-0B2545?style=for-the-badge)](https://sites.google.com/view/joseph-velasco-data-analyst/inicio)
-[![GitHub](https://img.shields.io/badge/🐙_GitHub-181717?style=for-the-badge)](https://github.com/DatajosephVe)
-[![Email](https://img.shields.io/badge/📧_Email-D14836?style=for-the-badge)](mailto:josephvelasco2223@gmail.com)
-[![CV](https://img.shields.io/badge/📄_Download_CV-134074?style=for-the-badge)](https://drive.google.com/file/d/1TG7yL_QXA8ul9wR1ELk41zo_BYcCbFgc/view?usp=sharing)
-
-📍 Venezuela 🇻🇪 · Available for remote work
-
-</div>
 
 ---
 
