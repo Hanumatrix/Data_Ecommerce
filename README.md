@@ -1,9 +1,9 @@
 # 📦 Brz Ecommerce — Power BI Analytics
 
-> **Análisis de +100,000 órdenes de un marketplace brasileño (2016–2018) con visualizaciones interactivas y dashboards dinámicos**  
-> Herramientas: Power BI · Power Query · DAX · SQL Server
+> **Analysis of 100,000+ orders from a Brazilian marketplace (2016–2018) with interactive visualizations and dynamic dashboards**  
+> Tools: Power BI · Power Query · DAX · SQL Server
 
-**Autor:** Joseph Velasco — Data Analyst
+**Author:** Tushar Rana
 
 ---
 
@@ -17,80 +17,63 @@
 
 ---
 
-## 🔗 Acceso al Reporte
+## 🔗 Report Access
 
-| Recurso | Enlace |
-|---|---|
+| Resource                   | Link                                                                                                                                                                                                                 |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 📊 **Reporte interactivo** | [Ver reporte en Power BI Service](https://app.powerbi.com/view?r=eyJrIjoiYWRkZDZmNWQtZmM1Ni00OTlhLTllMmMtMzMwMjBlYjRkMTg2IiwidCI6IjE4YzQ0ODRlLWFmYjctNGFjYS04NDM1LWZmYzQwOGY0YjE3NiJ9&pageName=7a6c62f682e264b660a5) |
-| 📦 **Dataset original** | [Brazilian E-Commerce — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) |
+| 📦 **Dataset original**    | [Brazilian E-Commerce — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)                                                                                                                         |
 
 ---
 
-## 📊 Vista del Dashboard
+## 📊 Dashboard Preview
 
-### 💰 Vista General de Ventas — Ingresos, Ticket Promedio y KPIs Clave
-![Dashboard Ventas](screenshots/Ventas_2.jpg)
+### 💰 Sales Overview — Revenue, Average Order Value, and Key KPIs
 
-### 🗺️ Distribución Geográfica y Segmentación de Ventas por Región
-![Dashboard Ventas 2](screenshots/Ventas.jpg)
+![Sales Dashboard](screenshots/Sales_2.png)
 
-### 📊 Rendimiento Operativo — Satisfacción, Logística y Eficiencia de Vendedores
-![Dashboard Desempeño](screenshots/Desempeno.png)
+### 🗺️ Geographic Distribution and Regional Sales Segmentation
 
-### 🏆 Ranking de Vendedores y Análisis de Concentración del Mercado
-![Dashboard Desempeño 2](screenshots/Desempeno_2.png)
+![Sales Dashboard 2](screenshots/Sales.png)
 
-### 📈 Evolución Temporal de Ventas — Tendencias, Estacionalidad y Efecto Noviembre
-![Histórico Ventas](screenshots/Historico_de_ventas.png)
+### 📊 Operational Performance — Satisfaction, Logistics, and Seller Efficiency
 
-### 🛍️ Análisis de Rentabilidad por Categoría de Producto
-![Tabla Categoría Productos](screenshots/Tabla_Categoria_Productos.png)
+![Performance Dashboard](screenshots/Performance.png)
 
-### 📦 Detalle de Productos — Volumen, Precio y Comportamiento de Venta
-![Tabla de Productos](screenshots/Tabla_de_Productos.png)
+### 🏆 Seller Ranking and Market Concentration Analysis
 
----
+![Performance Dashboard 2](screenshots/Performance_2.png)
 
-### 💰 Vista General de Ventas — Dark Mode
-![Dashboard Ventas Dark Mode](screenshots/Ventas_Dark_mode.jpg)
+### 📈 Sales History — Trends, Seasonality, and the November Effect
 
-### 🗺️ Distribución Geográfica y Segmentación de Ventas — Dark Mode
-![Dashboard Ventas 2 Dark Mode](screenshots/Ventas2_DarkMode.jpg)
+![Sales History](screenshots/Sales_History.png)
 
-### 📊 Rendimiento Operativo — Dark Mode
-![Dashboard Desempeño Dark Mode](screenshots/Desempeno_Dark_Mode.jpg)
+### 🛍️ Product Category Profitability Analysis
 
-### 🏆 Ranking de Vendedores y Concentración del Mercado — Dark Mode
-![Dashboard Desempeño 2 Dark Mode](screenshots/Desempeno_2_Dark_Mode.jpg)
+![Product Category Table](screenshots/Product_Category_Table.png)
 
-### 📈 Evolución Temporal de Ventas — Dark Mode
-![Histórico Ventas Dark Mode](screenshots/Historico_de_ventas_Dark_Mode.jpg)
+### 📦 Product Details — Volume, Price, and Sales Behavior
 
-### 🛍️ Rentabilidad por Categoría de Producto — Dark Mode
-![Tabla Categorías Dark Mode](screenshots/Tabla_Categorias_Productos_Dark_Mode.jpg)
+![Products Table](screenshots/Products_Table.png)
 
-### 📦 Detalle de Productos — Dark Mode
-![Tabla Productos Dark Mode](screenshots/Tabla_Productos_Dark_Mode.jpg)
----
-
-## 📌 Descripción del Proyecto
+## 📌 Project Description
 
 Este proyecto nace a partir de un trabajo previo realizado en **SQL Server**, donde se resolvieron las principales preguntas de negocio mediante consultas y vistas optimizadas. Ese análisis permitió validar la calidad de los datos, comprobar la lógica de negocio y asegurar que las métricas respondieran correctamente a los objetivos planteados.
 
 Ahora el proyecto evoluciona hacia **Power BI**, aprovechando el modelo de datos ya diseñado y las consultas previamente resueltas en SQL. La intención no es repetir el trabajo, sino **potenciarlo con visualizaciones interactivas y dashboards dinámicos** que hacen más accesible la información para usuarios de negocio.
 
 > 📁 El análisis técnico en SQL Server está documentado en el repositorio complementario:  
-> **[Brz Ecommerce — SQL Server Analysis](./README_SQL.md)**
+> **[Brz Ecommerce — SQL Server Analysis](./SQL_README.md)**
 
-### ¿Qué hace especial a este proyecto?
+### What Makes This Project Special?
 
 La conexión directa entre **SQL Server y Power BI vía ODBC** garantiza que los datos lleguen limpios y optimizados, evitando transformaciones innecesarias. El modelo híbrido estrella — con `dim_ordenes_detalles` como hub central — permite navegar entre métricas de orden y métricas de ítem sin duplicar resultados, mientras que las relaciones inactivas con `USERELATIONSHIP` añaden flexibilidad para análisis temporales desde múltiples perspectivas de fecha.
 
 ---
 
-## 📑 Índice
+## 📑 Table of Contents
 
-### 🧭 Instrucciones de navegación
+### 🧭 Navigation
 
 - Los apartados siguen el flujo completo del proyecto: **Carga → Limpieza → Modelado → Análisis → Conclusiones**.
 - Puedes volver al índice usando `Ctrl+F` y escribiendo **"📑 Índice"**.
@@ -123,15 +106,15 @@ La conexión directa entre **SQL Server y Power BI vía ODBC** garantiza que los
 
 ## 1 — KPIs Principales
 
-| Métrica | Valor |
-|---|---|
-| 💰 Ventas Totales | $8,700,000 |
-| 👥 Clientes Únicos | 53,000 |
-| 📦 Volumen de Órdenes | 54,000 |
-| 🎫 Ticket Promedio | $161.07 |
-| ✅ SLA de Entrega Cumplido | 90.8% (89,944 / 99,000 órdenes) |
-| ⭐ Puntaje Promedio de Reseñas | 4.09 / 5.00 |
-| 🏪 Concentración Top 10 Vendedores | 7.28% del mercado |
+| Métrica                            | Valor                           |
+| ---------------------------------- | ------------------------------- |
+| 💰 Ventas Totales                  | $8,700,000                      |
+| 👥 Clientes Únicos                 | 53,000                          |
+| 📦 Volumen de Órdenes              | 54,000                          |
+| 🎫 Ticket Promedio                 | $161.07                         |
+| ✅ SLA de Entrega Cumplido         | 90.8% (89,944 / 99,000 órdenes) |
+| ⭐ Puntaje Promedio de Reseñas     | 4.09 / 5.00                     |
+| 🏪 Concentración Top 10 Vendedores | 7.28% del mercado               |
 
 ---
 
@@ -205,6 +188,7 @@ El modelo evolucionó de una estrella clásica a una **arquitectura híbrida** c
 
 **🟦 Fact Table — `fact_orders_items`**  
 Tabla de hechos con granularidad por ítem vendido en cada orden.
+
 - `order_item_id`
 - `order_id`
 - `customer_id`
@@ -218,6 +202,7 @@ Tabla de hechos con granularidad por ítem vendido en cada orden.
 
 **🟩 Dimensión central — `dim_ordenes_detalles`**  
 Hub central del modelo. Concentra información de órdenes, fechas, status y métricas de reseñas.
+
 - `order_id`
 - `customer_id`
 - `seller_id`
@@ -237,6 +222,7 @@ Hub central del modelo. Concentra información de órdenes, fechas, status y mé
 
 **🟩 Dimensión — `dim_cliente`**  
 Información geográfica y demográfica del cliente.
+
 - `customer_id`
 - `customer_unique_id`
 - `customer_city`
@@ -249,6 +235,7 @@ Información geográfica y demográfica del cliente.
 
 **🟩 Dimensión — `dim_vendedores`**  
 Información del vendedor.
+
 - `seller_id`
 - `seller_city`
 - `seller_state`
@@ -258,6 +245,7 @@ Información del vendedor.
 
 **🟩 Dimensión — `dim_productos`**  
 Catálogo de productos.
+
 - `product_id`
 - `product_category`
 
@@ -265,6 +253,7 @@ Catálogo de productos.
 
 **🟩 Pagos — `dim_ordenes_pago`**  
 Detalle de pagos por orden.
+
 - `order_id`
 - `payment_sequential`
 - `payment_type`
@@ -274,6 +263,7 @@ Detalle de pagos por orden.
 
 **📅 Tabla — `Tabla_Calendario`**  
 Tabla de fechas para análisis temporal e inteligencia de tiempo.
+
 - `fecha` / `fechask`
 - `año` / `mes` / `mescorto`
 - `añomes` / `añomescorto`
@@ -295,7 +285,8 @@ Tabla de fechas para análisis temporal e inteligencia de tiempo.
 - **dim_ordenes_pago (N)** → **dim_ordenes_detalles (1)**
 - **Tabla_Calendario (1)** → **dim_ordenes_detalles (N)** — vía `fecha_compra`
 
-**Relaciones inactivas** *(se activan con `USERELATIONSHIP` en medidas específicas)*:
+**Relaciones inactivas** _(se activan con `USERELATIONSHIP` en medidas específicas)_:
+
 - **dim_cliente (1)** → **fact_orders_items (N)**
 - **dim_vendedores (1)** → **fact_orders_items (N)**
 - **Tabla_Calendario (1)** → **dim_ordenes_detalles (N)** — vía `order_delivered_customer_date`
@@ -318,6 +309,7 @@ Para habilitar funciones de inteligencia de tiempo (YTD, YoY, MTD), se creó la 
 Durante el modelado se realizaron cambios importantes para simplificar el modelo y mejorar la legibilidad:
 
 **Centralización de reseñas en `dim_ordenes_detalles`:**
+
 - Se deshabilitó la carga directa de la tabla `db_ordenes_reviews`.
 - Se agruparon las reseñas por `order_id` y se calcularon métricas agregadas:
   - `AvgReviewScore` → Promedio de reseñas por orden.
@@ -326,21 +318,22 @@ Durante el modelado se realizaron cambios importantes para simplificar el modelo
 - Estas columnas se integraron en `dim_ordenes_detalles`, evitando relaciones adicionales y reduciendo la cardinalidad del modelo.
 
 **Manejo de valores nulos:**
+
 - Se mantuvieron los valores `null` en métricas de reseñas para no distorsionar promedios y sumas.
 - Los `null` permiten identificar órdenes canceladas o sin reseña en combinación con `order_status`.
 
 **Traducción de estados de orden (`order_status`):**
 
-| Valor original | Traducción |
-|---|---|
-| `approved` | Aprobado |
-| `canceled` | Cancelado |
-| `created` | Creado |
-| `delivered` | Entregado |
-| `invoiced` | Facturado |
-| `processing` | En Proceso |
-| `shipped` | Enviado |
-| `unavailable` | No Disponible |
+| Valor original | Traducción    |
+| -------------- | ------------- |
+| `approved`     | Aprobado      |
+| `canceled`     | Cancelado     |
+| `created`      | Creado        |
+| `delivered`    | Entregado     |
+| `invoiced`     | Facturado     |
+| `processing`   | En Proceso    |
+| `shipped`      | Enviado       |
+| `unavailable`  | No Disponible |
 
 ---
 
@@ -348,19 +341,19 @@ Durante el modelado se realizaron cambios importantes para simplificar el modelo
 
 ### 3.1 — Clientes y mercado
 
-*Análisis del alcance geográfico y la expansión de la base de usuarios.*
+_Análisis del alcance geográfico y la expansión de la base de usuarios._
 
 **3.1.1 — Concentración por estado:**
 
 | Estado | Clientes Únicos |
-|---|---|
-| SP | 40,300 |
-| RJ | 12,380 |
-| MG | 11,259 |
+| ------ | --------------- |
+| SP     | 40,300          |
+| RJ     | 12,380          |
+| MG     | 11,259          |
 
-> **Insight:** El mercado está fuertemente liderado por la región sureste 
-> de Brasil. SP concentra el ~42% del total de clientes únicos, seguido 
-> por RJ y MG. Oportunidad de expansión en el norte y noreste, regiones 
+> **Insight:** El mercado está fuertemente liderado por la región sureste
+> de Brasil. SP concentra el ~42% del total de clientes únicos, seguido
+> por RJ y MG. Oportunidad de expansión en el norte y noreste, regiones
 > con baja penetración y alta población potencial.
 
 **3.1.2 — Crecimiento de nuevos clientes:**
@@ -370,39 +363,39 @@ Durante el modelado se realizaron cambios importantes para simplificar el modelo
 
 **3.1.3 — Ciudades con mayor volumen de venta:**
 
-| Ciudad | Volumen de Venta |
-|---|---|
-| São Paulo | $2,200,000 |
-| Rio de Janeiro | $1,160,000 |
-| Belo Horizonte | $421,770 |
-| Brasília | $354,422 |
-| Curitiba | $247,390 |
+| Ciudad         | Volumen de Venta |
+| -------------- | ---------------- |
+| São Paulo      | $2,200,000       |
+| Rio de Janeiro | $1,160,000       |
+| Belo Horizonte | $421,770         |
+| Brasília       | $354,422         |
+| Curitiba       | $247,390         |
 
 ---
 
 ### 3.2 — Ventas y productos
 
-*Identificación de los motores de ingresos y preferencias del consumidor.*
+_Identificación de los motores de ingresos y preferencias del consumidor._
 
 **3.2.1 — Categorías con mayor rotación (Top 5):**
 
-| Categoría | Unidades Vendidas |
-|---|---|
-| bed_bath_table | 11,115 |
-| health_beauty | 9,670 |
-| sports_leisure | 8,641 |
-| furniture_decor | 8,334 |
-| computers_accessories | 7,827 |
+| Categoría             | Unidades Vendidas |
+| --------------------- | ----------------- |
+| bed_bath_table        | 11,115            |
+| health_beauty         | 9,670             |
+| sports_leisure        | 8,641             |
+| furniture_decor       | 8,334             |
+| computers_accessories | 7,827             |
 
 **3.2.2 — Ticket promedio por cliente:** $161.07
 
 **3.2.3 — Productos de mayor valor de venta:**
 
-| SKU del Producto | Venta Total |
-|---|---|
-| `bb50f2e236e5eea0100680137654686c` | $63,885.00 |
-| `6cdd53843498f92890544667809f1595` | $54,730.20 |
-| `d6160fb7873f184099d9bc95e30376af` | $48,899.34 |
+| SKU del Producto                   | Venta Total |
+| ---------------------------------- | ----------- |
+| `bb50f2e236e5eea0100680137654686c` | $63,885.00  |
+| `6cdd53843498f92890544667809f1595` | $54,730.20  |
+| `d6160fb7873f184099d9bc95e30376af` | $48,899.34  |
 
 **3.2.4 — Estacionalidad y comportamiento temporal:**
 
@@ -416,7 +409,7 @@ Durante el modelado se realizaron cambios importantes para simplificar el modelo
 
 ### 3.3 — Vendedores
 
-*Evaluación del ecosistema de socios y eficiencia operativa.*
+_Evaluación del ecosistema de socios y eficiencia operativa._
 
 **3.3.1 — Ranking de órdenes por vendedor:**
 
@@ -437,7 +430,7 @@ El Top 10 de vendedores concentra solo el **7.28%** del mercado.
 
 ### 3.4 — Logística y entregas
 
-*Análisis de cumplimiento de tiempos y distribución geográfica.*
+_Análisis de cumplimiento de tiempos y distribución geográfica._
 
 **3.4.1 — Tiempo promedio de entrega por estado:**
 
@@ -451,10 +444,10 @@ De 99,000 órdenes totales, **89,944 (90.8%)** se entregaron a tiempo.
 **3.4.3 — Estados con mayor índice de retraso:**
 
 | Estado | % de Retraso |
-|---|---|
-| AL | 21.41% |
-| MA | 17.43% |
-| SE | 15.22% |
+| ------ | ------------ |
+| AL     | 21.41%       |
+| MA     | 17.43%       |
+| SE     | 15.22%       |
 
 > **Foco de atención:** los estados del noreste presentan tasas de retraso muy por encima del promedio nacional (9.2%). Se recomienda evaluar alianzas con operadores logísticos regionales o establecer centros de distribución intermedios en esa zona.
 
@@ -462,37 +455,38 @@ De 99,000 órdenes totales, **89,944 (90.8%)** se entregaron a tiempo.
 
 ### 3.5 — Pagos y facturación
 
-*Análisis de preferencias financieras y modalidades de pago.*
+_Análisis de preferencias financieras y modalidades de pago._
 
 **3.5.1 — Métodos de pago más utilizados:**
 
 El sistema de pagos está dominado por medios electrónicos.
+
 - **Tarjeta de Crédito:** método preferido por la gran mayoría de los usuarios.
 - **Boleto Bancario:** segunda opción más relevante.
 
 **3.5.2 — Valor promedio de transacción por tipo de pago:**
 
 | Método de Pago | Ticket Promedio |
-|---|---|
-| Credit Card | $163.32 |
-| Debit Card | $142.57 |
-| Boleto | $142.57 |
-| Voucher | $65.70 |
+| -------------- | --------------- |
+| Credit Card    | $163.32         |
+| Debit Card     | $142.57         |
+| Boleto         | $142.57         |
+| Voucher        | $65.70          |
 
 > **Insight:** los clientes que usan tarjeta de crédito realizan compras de mayor valor que los demás métodos, lo que abre una oportunidad de personalización de ofertas por método de pago.
 
 **3.5.3 — Modalidad: Pago único vs. cuotas:**
 
-| Modalidad | % de Órdenes |
-|---|---|
-| Pago Único | 96.94% |
-| Pago en Cuotas | 3.06% |
+| Modalidad      | % de Órdenes |
+| -------------- | ------------ |
+| Pago Único     | 96.94%       |
+| Pago en Cuotas | 3.06%        |
 
 ---
 
 ### 3.6 — Satisfacción del cliente
 
-*Correlación entre la operatividad logística y la percepción del usuario.*
+_Correlación entre la operatividad logística y la percepción del usuario._
 
 **3.6.1 — Reseñas negativas por estatus de orden:**
 
@@ -503,9 +497,9 @@ Se identificó un volumen crítico de reseñas negativas en órdenes con estatus
 **3.6.2 — Relación: tiempo de entrega vs. satisfacción:**
 
 | Estado | Días Promedio Entrega | Puntaje Promedio |
-|---|---|---|
-| AM | 26.36 días | 4.21 ⭐ |
-| RR | 29.34 días | 3.61 ⭐ |
+| ------ | --------------------- | ---------------- |
+| AM     | 26.36 días            | 4.21 ⭐          |
+| RR     | 29.34 días            | 3.61 ⭐          |
 
 > **Conclusión:** el tiempo de entrega influye, pero **la calidad de la atención durante la espera puede mitigar el impacto de una entrega tardía**. AM entrega tarde pero bien atendido; RR entrega tarde y mal gestionado.
 
@@ -517,7 +511,7 @@ El puntaje promedio en transacciones entregadas es **4.09 / 5.00**, con el 57% d
 
 ## 4 — Próximos Pasos
 
-*Roadmap estratégico para escalar el proyecto.*
+_Roadmap estratégico para escalar el proyecto._
 
 - **🛡️ Implementación de RLS (Row Level Security):** configurar seguridad a nivel de fila para que cada vendedor acceda únicamente a sus propias métricas en un entorno multi-usuario.
 - **⚡ Automatización de alertas:** crear flujos en Power Automate que notifiquen al equipo de logística cuando el SLA en estados críticos (AL, MA) baje del 85%.
@@ -539,13 +533,13 @@ El proyecto **Brz Ecommerce** demuestra una integración exitosa entre la ingeni
 
 ## 🛠️ Stack Tecnológico
 
-| Herramienta | Aplicación en el Proyecto |
-|---|---|
-| **SQL Server** | ETL, limpieza, vistas analíticas y validación de lógica de negocio |
-| **Power BI** | Modelado dimensional híbrido, DAX avanzado y diseño de UI/UX |
+| Herramienta         | Aplicación en el Proyecto                                             |
+| ------------------- | --------------------------------------------------------------------- |
+| **SQL Server**      | ETL, limpieza, vistas analíticas y validación de lógica de negocio    |
+| **Power BI**        | Modelado dimensional híbrido, DAX avanzado y diseño de UI/UX          |
 | **Power Query (M)** | Limpieza, normalización, tabla Calendario y centralización de reseñas |
-| **DAX** | KPIs, YoY, YTD, concentración de mercado, USERELATIONSHIP |
-| **Markdown** | Documentación técnica y comunicación de hallazgos |
+| **DAX**             | KPIs, YoY, YTD, concentración de mercado, USERELATIONSHIP             |
+| **Markdown**        | Documentación técnica y comunicación de hallazgos                     |
 
 ---
 
@@ -554,29 +548,22 @@ El proyecto **Brz Ecommerce** demuestra una integración exitosa entre la ingeni
 ```
 📁 Proyecto2-BrzEcommerce/
 │
-├── 📝 README_SQL.md                      ← Este archivo (SQL Server)
-├── 📝 README_BRZ_PowerBI.md              ← Documentación Power BI
-├── 📋 BRZ_Ecommerce_Documentacion.pdf        ← Documentación ejecutiva completa
+├── 📝 SQL_README.md                       ← SQL Server documentation
+├── 📝 README.md                           ← Power BI documentation
+├── 📋 Ecommerce_Documentation.pdf         ← Complete project documentation
 │
 ├── 🗄️ 01_Brz_Ecommerce_Database_Setup.sql
 ├── 🗄️ 02_Brz_Ecommerce_Data_Model_Views.sql
 ├── 🗄️ 03_Brz_Ecommerce_Business_Analysis.sql
 │
 └── 📁 screenshots/
-    ├── Ventas.png
-    ├── Ventas_2.png
-    ├── Ventas_Dark_mode.png
-    ├── Ventas_2_Dark_Mode.png
-    ├── Desempeno.png
-    ├── Desempeno_2.png
-    ├── Desempeno_Dark_Mode.png
-    ├── Desempeno_2_Dark_Mode.png
-    ├── Historico_de_ventas.png
-    ├── Historico_de_ventas_Dark_Mode.png
-    ├── Tabla_Categoria_Productos.png
-    ├── Tabla_Categorias_Productos_Dark_Mode.png
-    ├── Tabla_de_Productos.png
-    └── Tabla_Productos_Dark_Mode.png
+    ├── Sales.png
+    ├── Sales_2.png
+    ├── Performance.png
+    ├── Performance_2.png
+    ├── Sales_History.png
+    ├── Product_Category_Table.png
+    └── Products_Table.png
 ```
 
 ---
